@@ -21,17 +21,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Family",
-              "validation": {
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "Font family name",
-                "format": "plain",
-                "allowEmpty": true
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": [""]
             },
             {
               "type": "config",
@@ -39,16 +29,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Family (Bold)",
-              "validation": {
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "Font family name",
-                "format": "plain",
-                "allowEmpty": true
-              }
+              "defaultValue": [""]
             },
             {
               "type": "config",
@@ -56,16 +37,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Family (Italic)",
-              "validation": {
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "Font family name",
-                "format": "plain",
-                "allowEmpty": true
-              }
+              "defaultValue": [""]
             },
             {
               "type": "config",
@@ -73,16 +45,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Family (Bold Italic)",
-              "validation": {
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "Font family name",
-                "format": "plain",
-                "allowEmpty": true
-              }
+              "defaultValue": [""]
             },
             {
               "type": "comment",
@@ -94,15 +57,7 @@
               "valueType": "font-style",
               "required": false,
               "repeatable": false,
-              "defaultValue": "default",
-              "label": "Font Style",
-              "validation": {
-                "allowDisable": true,
-                "allowDefault": true
-              },
-              "options": {
-                "allowDisable": true
-              }
+              "defaultValue": "default"
             },
             {
               "type": "config",
@@ -110,15 +65,7 @@
               "valueType": "font-style",
               "required": false,
               "repeatable": false,
-              "defaultValue": "default",
-              "label": "Font Style (Bold)",
-              "validation": {
-                "allowDisable": true,
-                "allowDefault": true
-              },
-              "options": {
-                "allowDisable": true
-              }
+              "defaultValue": "default"
             },
             {
               "type": "config",
@@ -126,15 +73,7 @@
               "valueType": "font-style",
               "required": false,
               "repeatable": false,
-              "defaultValue": "default",
-              "label": "Font Style (Italic)",
-              "validation": {
-                "allowDisable": true,
-                "allowDefault": true
-              },
-              "options": {
-                "allowDisable": true
-              }
+              "defaultValue": "default"
             },
             {
               "type": "config",
@@ -142,15 +81,7 @@
               "valueType": "font-style",
               "required": false,
               "repeatable": false,
-              "defaultValue": "default",
-              "label": "Font Style (Bold Italic)",
-              "validation": {
-                "allowDisable": true,
-                "allowDefault": true
-              },
-              "options": {
-                "allowDisable": true
-              }
+              "defaultValue": "default"
             },
             {
               "type": "comment",
@@ -162,31 +93,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "bold,italic,bold-italic",
-              "label": "Synthetic Font Styles",
-              "validation": {
-                "caseSensitive": false,
-                "allowNegation": true,
-                "separator": ","
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": true,
-                "values": [
-                  {
-                    "value": "bold",
-                    "description": "Synthesize bold style"
-                  },
-                  {
-                    "value": "italic",
-                    "description": "Synthesize italic style"
-                  },
-                  {
-                    "value": "bold-italic",
-                    "description": "Synthesize bold italic style"
-                  }
-                ]
-              }
+              "defaultValue": "bold,italic,bold-italic"
             },
             {
               "type": "comment",
@@ -198,16 +105,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Features",
-              "validation": {
-                "format": "plain",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "e.g., -calt, +liga",
-                "format": "plain"
-              }
+              "defaultValue": [""]
             },
             {
               "type": "comment",
@@ -219,19 +117,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "13",
-              "label": "Font Size",
-              "validation": {
-                "min": 1,
-                "max": 500,
-                "positive": true,
-                "unit": "pt"
-              },
-              "options": {
-                "step": 0.5,
-                "showUnit": true
-              },
-              "platforms": ["linux"]
+              "defaultValue": "13"
             },
             {
               "type": "comment",
@@ -243,16 +129,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Variations",
-              "validation": {
-                "format": "key-value",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "e.g., wght=400",
-                "format": "key-value"
-              }
+              "defaultValue": [""]
             },
             {
               "type": "config",
@@ -260,16 +137,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Variations (Bold)",
-              "validation": {
-                "format": "key-value",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "e.g., wght=400",
-                "format": "key-value"
-              }
+              "defaultValue": [""]
             },
             {
               "type": "config",
@@ -277,16 +145,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Variations (Italic)",
-              "validation": {
-                "format": "key-value",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "e.g., wght=400",
-                "format": "key-value"
-              }
+              "defaultValue": [""]
             },
             {
               "type": "config",
@@ -294,16 +153,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Font Variations (Bold Italic)",
-              "validation": {
-                "format": "key-value",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "e.g., wght=400",
-                "format": "key-value"
-              }
+              "defaultValue": [""]
             },
             {
               "type": "comment",
@@ -315,17 +165,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Codepoint to Font Mapping",
-              "validation": {
-                "format": "assignment",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "e.g., U+E0A0-U+E0A3=Font Name",
-                "format": "assignment"
-              },
-              "platforms": ["windows"]
+              "defaultValue": [""]
             },
             {
               "type": "comment",
@@ -337,9 +177,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Thicken Font",
-              "platforms": ["macos"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -351,19 +189,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "255",
-              "label": "Thicken Strength",
-              "validation": {
-                "min": 0,
-                "max": 255,
-                "integer": true,
-                "unit": ""
-              },
-              "options": {
-                "step": 1,
-                "showUnit": false
-              },
-              "platforms": ["macos"]
+              "defaultValue": "255"
             },
             {
               "type": "comment",
@@ -375,23 +201,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "cursor",
-              "label": "Font Shaping Break Points",
-              "validation": {
-                "caseSensitive": false,
-                "allowNegation": true,
-                "separator": ","
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": true,
-                "values": [
-                  {
-                    "value": "cursor",
-                    "description": "Break runs under the cursor"
-                  }
-                ]
-              }
+              "defaultValue": "cursor"
             },
             {
               "type": "comment",
@@ -403,36 +213,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "hinting,no-force-autohint,no-monochrome,autohint",
-              "label": "FreeType Load Flags",
-              "validation": {
-                "caseSensitive": false,
-                "allowNegation": true,
-                "separator": ","
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": true,
-                "values": [
-                  {
-                    "value": "hinting",
-                    "description": "Enable font hinting"
-                  },
-                  {
-                    "value": "force-autohint",
-                    "description": "Always use FreeType auto-hinter"
-                  },
-                  {
-                    "value": "monochrome",
-                    "description": "1-bit monochrome rendering"
-                  },
-                  {
-                    "value": "autohint",
-                    "description": "Enable auto-hinter"
-                  }
-                ]
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "hinting,no-force-autohint,no-monochrome,autohint"
             },
             {
               "type": "comment",
@@ -444,12 +225,7 @@
               "valueType": "font-family",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Window Title Font",
-              "options": {
-                "allowSystemDefault": true
-              },
-              "platforms": ["linux"]
+              "defaultValue": ""
             }
           ]
         },
@@ -467,12 +243,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "#282c34",
-              "label": "Background Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": "#282c34"
             },
             {
               "type": "comment",
@@ -484,12 +255,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "#ffffff",
-              "label": "Foreground Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": "#ffffff"
             },
             {
               "type": "comment",
@@ -501,15 +267,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Selection Foreground",
-              "validation": {
-                "allowSpecialValues": ["cell-foreground", "cell-background"]
-              },
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             },
             {
               "type": "config",
@@ -517,15 +275,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Selection Background",
-              "validation": {
-                "allowSpecialValues": ["cell-foreground", "cell-background"]
-              },
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -794,12 +544,7 @@
                 "253=#dadada",
                 "254=#e4e4e4",
                 "255=#eeeeee"
-              ],
-              "label": "Color Palette",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              ]
             },
             {
               "type": "comment",
@@ -811,15 +556,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Cursor Color",
-              "validation": {
-                "allowSpecialValues": ["cell-foreground", "cell-background"]
-              },
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -831,15 +568,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Cursor Text Color",
-              "validation": {
-                "allowSpecialValues": ["cell-foreground", "cell-background"]
-              },
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -851,12 +580,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Unfocused Split Fill Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -868,12 +592,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Split Divider Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -885,13 +604,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Window Titlebar Background",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              },
-              "platforms": ["linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -903,13 +616,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Window Titlebar Foreground",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              },
-              "platforms": ["linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -921,12 +628,7 @@
               "valueType": "color",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Bold Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "defaultValue": ""
             }
           ]
         },
@@ -944,30 +646,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "native",
-              "label": "Alpha Blending Mode",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "native",
-                    "description": "Use native color space (Display P3 on macOS, sRGB on Linux)"
-                  },
-                  {
-                    "value": "linear",
-                    "description": "Linear space blending (eliminates darkening artifacts)"
-                  },
-                  {
-                    "value": "linear-corrected",
-                    "description": "Linear with correction for text"
-                  }
-                ]
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "native"
             },
             {
               "type": "comment",
@@ -979,15 +658,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Theme",
-              "validation": {
-                "pattern": "^(light:.+,dark:.+|.+)$"
-              },
-              "options": {
-                "placeholder": "Theme name or light:X,dark:Y"
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -999,12 +670,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "1",
-              "label": "Minimum Contrast Ratio",
-              "validation": {
-                "min": 1,
-                "max": 21
-              }
+              "defaultValue": "1"
             }
           ]
         },
@@ -1022,15 +688,7 @@
               "valueType": "filepath",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Background Image",
-              "validation": {
-                "extensions": [".png", ".jpg", ".jpeg"]
-              },
-              "options": {
-                "fileType": "image",
-                "dialogTitle": "Select Background Image"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1042,16 +700,7 @@
               "valueType": "opacity",
               "required": false,
               "repeatable": false,
-              "defaultValue": "1",
-              "label": "Background Image Opacity",
-              "validation": {
-                "min": 0
-              },
-              "options": {
-                "min": 0,
-                "max": 2,
-                "step": 0.01
-              }
+              "defaultValue": "1"
             },
             {
               "type": "comment",
@@ -1063,44 +712,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "center",
-              "label": "Background Image Position",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "top-left"
-                  },
-                  {
-                    "value": "top-center"
-                  },
-                  {
-                    "value": "top-right"
-                  },
-                  {
-                    "value": "center-left"
-                  },
-                  {
-                    "value": "center"
-                  },
-                  {
-                    "value": "center-right"
-                  },
-                  {
-                    "value": "bottom-left"
-                  },
-                  {
-                    "value": "bottom-center"
-                  },
-                  {
-                    "value": "bottom-right"
-                  }
-                ]
-              }
+              "defaultValue": "center"
             },
             {
               "type": "comment",
@@ -1112,33 +724,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "contain",
-              "label": "Background Image Fit",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "contain",
-                    "description": "Scale to fit (preserves aspect ratio)"
-                  },
-                  {
-                    "value": "cover",
-                    "description": "Scale to fill (may clip)"
-                  },
-                  {
-                    "value": "stretch",
-                    "description": "Stretch to fill (ignores aspect ratio)"
-                  },
-                  {
-                    "value": "none",
-                    "description": "No scaling"
-                  }
-                ]
-              }
+              "defaultValue": "contain"
             },
             {
               "type": "comment",
@@ -1150,8 +736,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Repeat Background Image"
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -1163,18 +748,7 @@
               "valueType": "opacity",
               "required": false,
               "repeatable": false,
-              "defaultValue": "1",
-              "label": "Background Opacity",
-              "validation": {
-                "min": 0,
-                "max": 1
-              },
-              "options": {
-                "min": 0,
-                "max": 1,
-                "step": 0.01
-              },
-              "platforms": ["macos"]
+              "defaultValue": "1"
             },
             {
               "type": "comment",
@@ -1186,8 +760,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Apply Opacity to Cells"
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -1199,13 +772,7 @@
               "valueType": "special-number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Background Blur",
-              "options": {
-                "specialFormats": [],
-                "allowBoolean": true
-              },
-              "platforms": ["macos", "linux", "windows"]
+              "defaultValue": "false"
             }
           ]
         },
@@ -1223,17 +790,7 @@
               "valueType": "opacity",
               "required": false,
               "repeatable": false,
-              "defaultValue": "1",
-              "label": "Cursor Opacity",
-              "validation": {
-                "min": 0,
-                "max": 1
-              },
-              "options": {
-                "min": 0,
-                "max": 1,
-                "step": 0.01
-              }
+              "defaultValue": "1"
             },
             {
               "type": "comment",
@@ -1245,33 +802,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "block",
-              "label": "Cursor Style",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "block",
-                    "description": "Block cursor"
-                  },
-                  {
-                    "value": "bar",
-                    "description": "Bar cursor"
-                  },
-                  {
-                    "value": "underline",
-                    "description": "Underline cursor"
-                  },
-                  {
-                    "value": "block_hollow",
-                    "description": "Hollow block cursor"
-                  }
-                ]
-              }
+              "defaultValue": "block"
             },
             {
               "type": "comment",
@@ -1283,29 +814,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Cursor Blink",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": true,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "",
-                    "description": "Default (blink enabled, respects DEC mode 12)"
-                  },
-                  {
-                    "value": "true",
-                    "description": "Always blink"
-                  },
-                  {
-                    "value": "false",
-                    "description": "Never blink"
-                  }
-                ]
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1317,9 +826,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Click to Move Cursor",
-              "platforms": ["macos", "linux"]
+              "defaultValue": "true"
             }
           ]
         },
@@ -1337,17 +844,7 @@
               "valueType": "opacity",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0.7",
-              "label": "Unfocused Split Opacity",
-              "validation": {
-                "min": 0.15,
-                "max": 1
-              },
-              "options": {
-                "min": 0.15,
-                "max": 1,
-                "step": 0.01
-              }
+              "defaultValue": "0.7"
             },
             {
               "type": "comment",
@@ -1359,8 +856,7 @@
               "valueType": "opacity",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0.5",
-              "label": "Faint Opacity"
+              "defaultValue": "0.5"
             }
           ]
         },
@@ -1378,17 +874,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Cell Width",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "config",
@@ -1396,17 +882,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Cell Height",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1418,17 +894,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Font Baseline",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1440,17 +906,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Underline Position",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1462,17 +918,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Underline Thickness",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1484,17 +930,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Strikethrough Position",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1506,17 +942,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Strikethrough Thickness",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1528,17 +954,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Overline Position",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1550,17 +966,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Overline Thickness",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1572,17 +978,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Cursor Thickness",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1594,17 +990,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Cursor Height",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1616,17 +1002,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Box Thickness",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1638,17 +1014,7 @@
               "valueType": "adjustment",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Adjust Icon Height",
-              "validation": {
-                "allowPercentage": true,
-                "allowInteger": true,
-                "minPercentage": -100,
-                "maxPercentage": 100
-              },
-              "options": {
-                "defaultUnit": "px"
-              }
+              "defaultValue": ""
             }
           ]
         },
@@ -1666,8 +1032,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Custom Shader"
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1679,8 +1044,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Custom Shader Animation"
+              "defaultValue": "true"
             }
           ]
         }
@@ -1705,9 +1069,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Start Maximized",
-              "platforms": ["windows"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -1719,9 +1081,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Start Fullscreen",
-              "platforms": ["macos", "windows"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -1733,9 +1093,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Vertical Sync",
-              "platforms": ["macos"]
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -1747,9 +1105,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Inherit Working Directory",
-              "platforms": ["windows"]
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -1761,9 +1117,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Inherit Font Size",
-              "platforms": ["windows"]
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -1775,17 +1129,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "default",
-              "label": "Window Save State",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos"]
+              "defaultValue": "default"
             },
             {
               "type": "comment",
@@ -1797,9 +1141,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Window Step Resize",
-              "platforms": ["macos"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -1811,16 +1153,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Confirm Close Surface",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -1832,17 +1165,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Initial Window",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "true"
             }
           ]
         },
@@ -1860,12 +1183,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Window Title",
-              "options": {
-                "placeholder": "Window title"
-              },
-              "platforms": ["windows"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -1877,34 +1195,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "auto",
-              "label": "Window Decorations",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "auto",
-                    "description": "Automatic (native look)"
-                  },
-                  {
-                    "value": "none",
-                    "description": "No decorations"
-                  },
-                  {
-                    "value": "client",
-                    "description": "Client-side decorations"
-                  },
-                  {
-                    "value": "server",
-                    "description": "Server-side decorations"
-                  }
-                ]
-              },
-              "platforms": ["macos", "linux", "windows"]
+              "defaultValue": "auto"
             },
             {
               "type": "comment",
@@ -1916,26 +1207,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Window Subtitle",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "false",
-                    "description": "No subtitle"
-                  },
-                  {
-                    "value": "working-directory",
-                    "description": "Show working directory"
-                  }
-                ]
-              },
-              "platforms": ["linux"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -1947,38 +1219,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "auto",
-              "label": "Window Theme",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "auto",
-                    "description": "Auto-detect from background color"
-                  },
-                  {
-                    "value": "system",
-                    "description": "Use system theme"
-                  },
-                  {
-                    "value": "light",
-                    "description": "Always use light theme"
-                  },
-                  {
-                    "value": "dark",
-                    "description": "Always use dark theme"
-                  },
-                  {
-                    "value": "ghostty",
-                    "description": "Use Ghostty config colors (Linux only)"
-                  }
-                ]
-              },
-              "platforms": ["macos"]
+              "defaultValue": "auto"
             },
             {
               "type": "comment",
@@ -1990,26 +1231,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "srgb",
-              "label": "Window Color Space",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "srgb",
-                    "description": "sRGB color space"
-                  },
-                  {
-                    "value": "display-p3",
-                    "description": "Display P3 color space"
-                  }
-                ]
-              },
-              "platforms": ["macos"]
+              "defaultValue": "srgb"
             },
             {
               "type": "comment",
@@ -2021,16 +1243,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "current",
-              "label": "Window New Tab Position",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "current"
             },
             {
               "type": "comment",
@@ -2042,17 +1255,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "auto",
-              "label": "Window Show Tab Bar",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["linux"]
+              "defaultValue": "auto"
             }
           ]
         },
@@ -2070,17 +1273,7 @@
               "valueType": "padding",
               "required": false,
               "repeatable": false,
-              "defaultValue": "2",
-              "label": "Horizontal Padding",
-              "validation": {
-                "allowPair": true,
-                "min": 0
-              },
-              "options": {
-                "allowPair": true,
-                "labels": ["Left", "Right"]
-              },
-              "platforms": ["windows"]
+              "defaultValue": "2"
             },
             {
               "type": "comment",
@@ -2092,17 +1285,7 @@
               "valueType": "padding",
               "required": false,
               "repeatable": false,
-              "defaultValue": "2",
-              "label": "Vertical Padding",
-              "validation": {
-                "allowPair": true,
-                "min": 0
-              },
-              "options": {
-                "allowPair": true,
-                "labels": ["Top", "Bottom"]
-              },
-              "platforms": ["windows"]
+              "defaultValue": "2"
             },
             {
               "type": "comment",
@@ -2114,8 +1297,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Balance Padding"
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -2127,29 +1309,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "background",
-              "label": "Padding Color",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "background",
-                    "description": "Use background color"
-                  },
-                  {
-                    "value": "extend",
-                    "description": "Extend nearest grid cell color"
-                  },
-                  {
-                    "value": "extend-always",
-                    "description": "Always extend (no heuristics)"
-                  }
-                ]
-              }
+              "defaultValue": "background"
             }
           ]
         },
@@ -2167,14 +1327,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0",
-              "label": "Window Height",
-              "validation": {
-                "min": 0,
-                "integer": true,
-                "unit": "cells"
-              },
-              "platforms": ["linux", "windows"]
+              "defaultValue": "0"
             },
             {
               "type": "config",
@@ -2182,13 +1335,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0",
-              "label": "Window Width",
-              "validation": {
-                "min": 0,
-                "integer": true,
-                "unit": "cells"
-              }
+              "defaultValue": "0"
             },
             {
               "type": "comment",
@@ -2200,13 +1347,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Window X Position",
-              "validation": {
-                "integer": true,
-                "unit": "px"
-              },
-              "platforms": ["macos"]
+              "defaultValue": ""
             },
             {
               "type": "config",
@@ -2214,12 +1355,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Window Y Position",
-              "validation": {
-                "integer": true,
-                "unit": "px"
-              }
+              "defaultValue": ""
             }
           ]
         },
@@ -2238,8 +1374,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "false",
-              "platforms": ["linux"],
-              "label": "Gtk Opengl Debug"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2252,8 +1387,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "detect",
-              "platforms": ["linux"],
-              "label": "Gtk Single Instance"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2266,16 +1400,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "true",
-              "platforms": ["macos", "linux"],
-              "label": "Gtk Titlebar",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2288,16 +1413,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "top",
-              "platforms": ["linux"],
-              "label": "Gtk Tabs Location",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2310,8 +1426,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "false",
-              "platforms": ["linux"],
-              "label": "Gtk Titlebar Hide When Maximized"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2324,16 +1439,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "raised",
-              "platforms": ["linux"],
-              "label": "Gtk Toolbar Style",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2346,16 +1452,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "native",
-              "platforms": ["linux"],
-              "label": "Gtk Titlebar Style",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2368,8 +1465,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "true",
-              "platforms": ["linux"],
-              "label": "Gtk Wide Tabs"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -2382,8 +1478,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["linux"],
-              "label": "Gtk Custom Css"
+              "platforms": ["linux"]
             }
           ]
         },
@@ -2402,8 +1497,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "false",
-              "platforms": ["macos"],
-              "label": "Macos Non Native Fullscreen"
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2416,16 +1510,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "visible",
-              "platforms": ["macos", "windows"],
-              "label": "Macos Window Buttons",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2438,16 +1523,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "transparent",
-              "platforms": ["macos", "windows"],
-              "label": "Macos Titlebar Style",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2460,16 +1536,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "visible",
-              "platforms": ["macos", "windows"],
-              "label": "Macos Titlebar Proxy Icon",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2482,8 +1549,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "true",
-              "platforms": ["macos"],
-              "label": "Macos Window Shadow"
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2496,16 +1562,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "official",
-              "platforms": ["macos"],
-              "label": "Macos Icon",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2518,8 +1575,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["macos"],
-              "label": "Macos Custom Icon"
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2532,12 +1588,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "aluminum",
-              "platforms": ["macos"],
-              "label": "Macos Icon Frame",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2550,12 +1601,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["macos"],
-              "label": "Macos Icon Ghost Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -2568,12 +1614,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["macos"],
-              "label": "Macos Icon Screen Color",
-              "options": {
-                "format": "hex",
-                "alpha": false
-              }
+              "platforms": ["macos"]
             }
           ]
         }
@@ -3201,18 +2242,7 @@
                   },
                   "action": "new_split:right"
                 }
-              ],
-              "label": "Keybinding",
-              "validation": {
-                "requireModifier": false,
-                "allowSequences": true,
-                "allowPrefixes": ["global:", "all:", "unconsumed:", "performable:"]
-              },
-              "options": {
-                "showPrefixes": true,
-                "showSequences": true
-              },
-              "platforms": ["macos"]
+              ]
             }
           ]
         },
@@ -3230,9 +2260,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Hide Mouse While Typing",
-              "platforms": ["macos"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -3244,33 +2272,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Mouse Shift Capture",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "false",
-                    "description": "Shift extends selection (can be overridden)"
-                  },
-                  {
-                    "value": "true",
-                    "description": "Shift sent to program (can be overridden)"
-                  },
-                  {
-                    "value": "never",
-                    "description": "Always extend selection"
-                  },
-                  {
-                    "value": "always",
-                    "description": "Always send to program"
-                  }
-                ]
-              }
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -3282,12 +2284,7 @@
               "valueType": "special-number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "precision:1,discrete:3",
-              "label": "Mouse Scroll Multiplier",
-              "options": {
-                "specialFormats": ["precision:N,discrete:N"],
-                "allowBoolean": false
-              }
+              "defaultValue": "precision:1,discrete:3"
             },
             {
               "type": "comment",
@@ -3299,8 +2296,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Focus Follows Mouse"
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -3312,16 +2308,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "context-menu",
-              "label": "Right Click Action",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "context-menu"
             },
             {
               "type": "comment",
@@ -3333,9 +2320,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0",
-              "label": "Click Repeat Interval",
-              "platforms": ["macos"]
+              "defaultValue": "0"
             }
           ]
         },
@@ -3353,16 +2338,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "ask",
-              "label": "Clipboard Read",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "ask"
             },
             {
               "type": "config",
@@ -3370,16 +2346,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "allow",
-              "label": "Clipboard Write",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "allow"
             },
             {
               "type": "comment",
@@ -3391,8 +2358,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Clipboard Trim Trailing Spaces"
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -3404,8 +2370,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Clipboard Paste Protection"
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -3417,8 +2382,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Clipboard Paste Bracketed Safe"
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -3430,9 +2394,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Copy On Select",
-              "platforms": ["macos", "linux"]
+              "defaultValue": "true"
             }
           ]
         },
@@ -3450,8 +2412,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Clear Selection on Typing"
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -3463,8 +2424,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Clear Selection on Copy"
+              "defaultValue": "false"
             }
           ]
         }
@@ -3489,25 +2449,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "unicode",
-              "label": "Grapheme Width Method",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "unicode",
-                    "description": "Use Unicode standard"
-                  },
-                  {
-                    "value": "legacy",
-                    "description": "Use legacy method (wcswidth)"
-                  }
-                ]
-              }
+              "defaultValue": "unicode"
             },
             {
               "type": "comment",
@@ -3519,25 +2461,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "keystroke,no-output",
-              "label": "Scroll to Bottom",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": true,
-                "values": [
-                  {
-                    "value": "keystroke",
-                    "description": "Scroll on keystroke"
-                  },
-                  {
-                    "value": "output",
-                    "description": "Scroll on output"
-                  }
-                ]
-              }
+              "defaultValue": "keystroke,no-output"
             },
             {
               "type": "comment",
@@ -3549,8 +2473,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Wait After Command"
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -3562,14 +2485,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "250",
-              "label": "Abnormal Exit Threshold",
-              "validation": {
-                "min": 0,
-                "integer": true,
-                "unit": "ms"
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "250"
             },
             {
               "type": "comment",
@@ -3581,13 +2497,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "10000000",
-              "label": "Scrollback Limit",
-              "validation": {
-                "min": 0,
-                "integer": true,
-                "unit": "bytes"
-              }
+              "defaultValue": "10000000"
             },
             {
               "type": "comment",
@@ -3599,9 +2509,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Enable URL Links",
-              "platforms": ["macos", "linux"]
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -3613,29 +2521,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Show Link Previews",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": [
-                  {
-                    "value": "true",
-                    "description": "Show previews for all links"
-                  },
-                  {
-                    "value": "false",
-                    "description": "Never show previews"
-                  },
-                  {
-                    "value": "osc8",
-                    "description": "Only show for OSC 8 hyperlinks"
-                  }
-                ]
-              }
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -3647,8 +2533,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "320000000",
-              "label": "Image Storage Limit"
+              "defaultValue": "320000000"
             },
             {
               "type": "comment",
@@ -3660,8 +2545,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "xterm-ghostty",
-              "label": "Term"
+              "defaultValue": "xterm-ghostty"
             }
           ]
         },
@@ -3679,15 +2563,7 @@
               "valueType": "command",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Shell Command",
-              "validation": {
-                "allowPrefixes": ["direct:", "shell:"]
-              },
-              "options": {
-                "showPrefixes": true
-              },
-              "platforms": ["windows"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -3699,15 +2575,7 @@
               "valueType": "command",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Initial Command",
-              "validation": {
-                "allowPrefixes": ["direct:", "shell:"]
-              },
-              "options": {
-                "showPrefixes": true
-              },
-              "platforms": ["linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -3719,16 +2587,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": [""],
-              "label": "Environment Variables",
-              "validation": {
-                "format": "key-value",
-                "allowEmpty": true
-              },
-              "options": {
-                "placeholder": "KEY=VALUE",
-                "format": "key-value"
-              }
+              "defaultValue": [""]
             },
             {
               "type": "comment",
@@ -3740,14 +2599,7 @@
               "valueType": "command",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Startup Input",
-              "validation": {
-                "allowPrefixes": ["direct:", "shell:"]
-              },
-              "options": {
-                "showPrefixes": true
-              }
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -3759,9 +2611,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Working Directory",
-              "platforms": ["macos", "linux"]
+              "defaultValue": ""
             }
           ]
         },
@@ -3779,16 +2629,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "detect",
-              "label": "Shell Integration",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "detect"
             },
             {
               "type": "comment",
@@ -3800,17 +2641,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path",
-              "label": "Shell Integration Features",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos"]
+              "defaultValue": "cursor,no-sudo,title,no-ssh-env,no-ssh-terminfo,path"
             }
           ]
         },
@@ -3828,16 +2659,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Title Report",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -3849,16 +2671,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "16-bit",
-              "label": "Osc Color Report Format",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "16-bit"
             },
             {
               "type": "comment",
@@ -3870,8 +2683,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Vt Kam Allowed"
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -3883,8 +2695,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Enquiry Response"
+              "defaultValue": ""
             }
           ]
         }
@@ -3909,17 +2720,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "top",
-              "label": "Quick Terminal Position",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos"]
+              "defaultValue": "top"
             },
             {
               "type": "comment",
@@ -3932,16 +2733,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "top",
-              "platforms": ["linux", "windows"],
-              "label": "Gtk Quick Terminal Layer",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -3954,8 +2746,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "ghostty-quick-terminal",
-              "platforms": ["linux"],
-              "label": "Gtk Quick Terminal Namespace"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -3967,17 +2758,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "main",
-              "label": "Quick Terminal Screen",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos"]
+              "defaultValue": "main"
             },
             {
               "type": "comment",
@@ -3989,9 +2770,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0.2",
-              "label": "Quick Terminal Animation Duration",
-              "platforms": ["macos"]
+              "defaultValue": "0.2"
             },
             {
               "type": "comment",
@@ -4003,9 +2782,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Quick Terminal Autohide",
-              "platforms": ["macos", "linux"]
+              "defaultValue": "true"
             },
             {
               "type": "comment",
@@ -4017,17 +2794,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "move",
-              "label": "Quick Terminal Space Behavior",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "move"
             },
             {
               "type": "comment",
@@ -4039,17 +2806,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "on-demand",
-              "label": "Quick Terminal Keyboard Interactivity",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "on-demand"
             }
           ]
         },
@@ -4373,14 +3130,7 @@
                   "description": "Undo the last action.",
                   "action": "undo"
                 }
-              ],
-              "label": "Command Palette Entry",
-              "validation": {
-                "allowPrefixes": ["direct:", "shell:"]
-              },
-              "options": {
-                "showPrefixes": true
-              }
+              ]
             }
           ]
         },
@@ -4398,8 +3148,7 @@
               "valueType": "boolean",
               "required": false,
               "repeatable": false,
-              "defaultValue": "after-first",
-              "label": "Resize Overlay"
+              "defaultValue": "after-first"
             },
             {
               "type": "comment",
@@ -4411,16 +3160,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "center",
-              "label": "Resize Overlay Position",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "center"
             },
             {
               "type": "comment",
@@ -4432,8 +3172,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "750ms",
-              "label": "Resize Overlay Duration"
+              "defaultValue": "750ms"
             }
           ]
         }
@@ -4458,17 +3197,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "no-system,no-audio,attention,title,no-border",
-              "label": "Bell Features",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["linux"]
+              "defaultValue": "no-system,no-audio,attention,title,no-border"
             },
             {
               "type": "comment",
@@ -4480,9 +3209,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Bell Audio Path",
-              "platforms": ["linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -4494,9 +3221,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "0.5",
-              "label": "Bell Audio Volume",
-              "platforms": ["linux"]
+              "defaultValue": "0.5"
             }
           ]
         },
@@ -4514,17 +3239,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "clipboard-copy,config-reload",
-              "label": "App Notifications",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["linux"]
+              "defaultValue": "clipboard-copy,config-reload"
             },
             {
               "type": "comment",
@@ -4536,16 +3251,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "true",
-              "label": "Desktop Notifications",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "defaultValue": "true"
             }
           ]
         }
@@ -4570,15 +3276,7 @@
               "valueType": "text",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Application Class",
-              "validation": {
-                "pattern": "^[a-zA-Z][a-zA-Z0-9_.-]*$"
-              },
-              "options": {
-                "placeholder": "com.example.app"
-              },
-              "platforms": ["linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -4591,11 +3289,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["linux"],
-              "label": "X11 Instance Name",
-              "options": {
-                "placeholder": "ghostty"
-              }
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -4607,17 +3301,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "false",
-              "label": "Quit After Last Window Closed",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": "false"
             },
             {
               "type": "comment",
@@ -4629,9 +3313,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Quit After Last Window Closed Delay",
-              "platforms": ["linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -4643,9 +3325,7 @@
               "valueType": "number",
               "required": false,
               "repeatable": false,
-              "defaultValue": "5s",
-              "label": "Undo Timeout",
-              "platforms": ["macos"]
+              "defaultValue": "5s"
             }
           ]
         },
@@ -4663,8 +3343,7 @@
               "valueType": "filepath",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Config File"
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -4676,11 +3355,7 @@
               "valueType": "repeatable-text",
               "required": false,
               "repeatable": true,
-              "defaultValue": ["true"],
-              "label": "Config Default Files",
-              "validation": {
-                "allowEmpty": true
-              }
+              "defaultValue": ["true"]
             }
           ]
         },
@@ -4698,17 +3373,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Auto Update",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos", "linux"]
+              "defaultValue": ""
             },
             {
               "type": "comment",
@@ -4720,17 +3385,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "",
-              "label": "Auto Update Channel",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["macos"]
+              "defaultValue": ""
             }
           ]
         },
@@ -4748,17 +3403,7 @@
               "valueType": "enum",
               "required": false,
               "repeatable": false,
-              "defaultValue": "auto",
-              "label": "Async Backend",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              },
-              "platforms": ["linux"]
+              "defaultValue": "auto"
             }
           ]
         },
@@ -4777,8 +3422,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "never",
-              "platforms": ["linux", "windows"],
-              "label": "Linux Cgroup"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -4791,8 +3435,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["linux"],
-              "label": "Linux Cgroup Memory Limit"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -4805,8 +3448,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["linux"],
-              "label": "Linux Cgroup Processes Limit"
+              "platforms": ["linux"]
             },
             {
               "type": "comment",
@@ -4819,8 +3461,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "false",
-              "platforms": ["linux"],
-              "label": "Linux Cgroup Hard Fail"
+              "platforms": ["linux"]
             }
           ]
         },
@@ -4839,16 +3480,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "new-tab",
-              "platforms": ["macos"],
-              "label": "Macos Dock Drop Behavior",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -4861,16 +3493,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "",
-              "platforms": ["macos"],
-              "label": "Macos Option As Alt",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -4883,8 +3506,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "never",
-              "platforms": ["macos"],
-              "label": "Macos Hidden"
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -4897,8 +3519,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "true",
-              "platforms": ["macos"],
-              "label": "Macos Auto Secure Input"
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -4911,8 +3532,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "true",
-              "platforms": ["macos"],
-              "label": "Macos Secure Input Indication"
+              "platforms": ["macos"]
             },
             {
               "type": "comment",
@@ -4925,16 +3545,7 @@
               "required": false,
               "repeatable": false,
               "defaultValue": "ask",
-              "platforms": ["macos"],
-              "label": "Macos Shortcuts",
-              "validation": {
-                "caseSensitive": false
-              },
-              "options": {
-                "allowCustom": false,
-                "multiselect": false,
-                "values": []
-              }
+              "platforms": ["macos"]
             }
           ]
         }

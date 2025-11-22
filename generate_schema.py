@@ -8,10 +8,10 @@ from pathlib import Path
 from typing import Dict, Optional, List
 
 
-def parse_properties_file(properties_file: Path) -> tuple[Dict[str, str], Dict[str, Optional[str]]]:
+def parse_properties_file(properties_file: Path) -> tuple[Dict[str, List[str]], Dict[str, Optional[str]]]:
     """
     Parse properties file to extract:
-    1. Default values for each key
+    1. Default values for each key (supports multiple values for repeatable keys)
     2. Comments associated with each key
 
     Returns: (default_values, key_comments)
@@ -43,14 +43,17 @@ def parse_properties_file(properties_file: Path) -> tuple[Dict[str, str], Dict[s
             value = stripped.split('=', 1)[1].strip() if len(stripped.split('=', 1)) > 1 else ''
 
             if key:
-                # Store default value
-                default_values[key] = value
+                # Store default value (support multiple values)
+                if key not in default_values:
+                    default_values[key] = []
+                default_values[key].append(value)
 
-                # Store comment if we have accumulated any
-                if current_comment_lines:
-                    key_comments[key] = '\n'.join(current_comment_lines)
-                else:
-                    key_comments[key] = None
+                # Store comment only for the first occurrence
+                if key not in key_comments:
+                    if current_comment_lines:
+                        key_comments[key] = '\n'.join(current_comment_lines)
+                    else:
+                        key_comments[key] = None
 
                 # Reset comment accumulator
                 current_comment_lines = []
@@ -139,17 +142,26 @@ def generate_schema_json(
                     total_comments += 1
 
                 # Build ConfigProperty
+                # Check if this key is repeatable (has multiple values in properties file)
+                is_key_repeatable = is_repeatable(value_type) or (key in default_values and len(default_values[key]) > 1)
+
                 config_property = {
                     "type": "config",
                     "key": key,
                     "valueType": value_type,
                     "required": False,
-                    "repeatable": is_repeatable(value_type)
+                    "repeatable": is_key_repeatable
                 }
 
                 # Add default value if exists
                 if key in default_values:
-                    config_property['defaultValue'] = default_values[key]
+                    values = default_values[key]
+                    # For repeatable keys, store ALL values as an array
+                    # For non-repeatable keys, use the last value (in case of duplicates)
+                    if is_key_repeatable:
+                        config_property['defaultValue'] = values
+                    else:
+                        config_property['defaultValue'] = values[-1] if values else None
 
                 # Add platform restrictions if applicable
                 platforms = infer_platforms(key)

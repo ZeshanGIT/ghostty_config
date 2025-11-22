@@ -9,7 +9,34 @@ from pathlib import Path
 from typing import Dict, Optional, List
 
 
-def parse_keybinding(value: str) -> Optional[Dict[str, str]]:
+def parse_key_combo(key_str: str) -> Dict:
+    """
+    Parse a key combination string into modifiers and key.
+
+    Examples:
+        "super+d" -> {"modifiers": ["super"], "key": "d"}
+        "super+shift+d" -> {"modifiers": ["super", "shift"], "key": "d"}
+        "enter" -> {"modifiers": [], "key": "enter"}
+
+    Returns: {"modifiers": [...], "key": "..."}
+    """
+    parts = key_str.split('+')
+
+    if len(parts) == 1:
+        # No modifiers, just a key
+        return {
+            "modifiers": [],
+            "key": parts[0]
+        }
+    else:
+        # Last part is the key, everything else is modifiers
+        return {
+            "modifiers": parts[:-1],
+            "key": parts[-1]
+        }
+
+
+def parse_keybinding(value: str) -> Optional[Dict]:
     """
     Parse a keybind value string into a structured object.
 
@@ -20,7 +47,7 @@ def parse_keybinding(value: str) -> Optional[Dict[str, str]]:
         super+shift+d=new_split:down
         super+enter=toggle_fullscreen
 
-    Returns: {"key": "...", "action": "..."}
+    Returns: {"keyCombo": {"modifiers": [...], "key": "..."}, "action": "..."}
     """
     if not value or not value.strip():
         return None
@@ -39,8 +66,11 @@ def parse_keybinding(value: str) -> Optional[Dict[str, str]]:
         print(f"⚠️  Warning: Invalid keybind (empty key or action): {value}")
         return None
 
+    # Parse the key combo
+    key_combo = parse_key_combo(key)
+
     return {
-        "key": key,
+        "keyCombo": key_combo,
         "action": action
     }
 
@@ -119,9 +149,27 @@ def update_schema_with_structured_values(schema_file: Path):
                     if key_obj.get('valueType') == 'repeatable-text':
                         key_obj['valueType'] = 'command'
 
-                    # Parse the defaultValue if it's a string
                     default_value = key_obj.get('defaultValue')
-                    if default_value and isinstance(default_value, str):
+
+                    # Parse if it's an array of strings
+                    if default_value and isinstance(default_value, list):
+                        parsed_list = []
+                        for val in default_value:
+                            if isinstance(val, str):
+                                parsed = parse_command_entry(val)
+                                if parsed:
+                                    parsed_list.append(parsed)
+                                    print(f"   ✅ Command: {parsed['title']}")
+                                else:
+                                    print(f"   ❌ Failed to parse command: {val}")
+                            else:
+                                # Already parsed, keep as-is
+                                parsed_list.append(val)
+                        key_obj['defaultValue'] = parsed_list
+                        command_converted += len(parsed_list)
+
+                    # Parse if it's a single string
+                    elif default_value and isinstance(default_value, str):
                         parsed = parse_command_entry(default_value)
                         if parsed:
                             key_obj['defaultValue'] = parsed
@@ -134,16 +182,57 @@ def update_schema_with_structured_values(schema_file: Path):
                 elif key_name == 'keybind':
                     keybind_total += 1
 
-                    # Parse the defaultValue if it's a string
                     default_value = key_obj.get('defaultValue')
-                    if default_value and isinstance(default_value, str):
+
+                    # Parse if it's an array of strings
+                    if default_value and isinstance(default_value, list):
+                        parsed_list = []
+                        for val in default_value:
+                            if isinstance(val, str):
+                                parsed = parse_keybinding(val)
+                                if parsed:
+                                    parsed_list.append(parsed)
+                                    modifiers_str = '+'.join(parsed['keyCombo']['modifiers']) + '+' if parsed['keyCombo']['modifiers'] else ''
+                                    print(f"   ✅ Keybind: {modifiers_str}{parsed['keyCombo']['key']} = {parsed['action']}")
+                                else:
+                                    print(f"   ❌ Failed to parse keybind: {val}")
+                            elif isinstance(val, dict) and 'key' in val and 'keyCombo' not in val:
+                                # Convert old format
+                                key_combo = parse_key_combo(val['key'])
+                                parsed = {
+                                    'keyCombo': key_combo,
+                                    'action': val['action']
+                                }
+                                parsed_list.append(parsed)
+                                modifiers_str = '+'.join(key_combo['modifiers']) + '+' if key_combo['modifiers'] else ''
+                                print(f"   ✅ Keybind: {modifiers_str}{key_combo['key']} = {val['action']}")
+                            else:
+                                # Already parsed, keep as-is
+                                parsed_list.append(val)
+                        key_obj['defaultValue'] = parsed_list
+                        keybind_converted += len(parsed_list)
+
+                    # Parse if it's a single string
+                    elif default_value and isinstance(default_value, str):
                         parsed = parse_keybinding(default_value)
                         if parsed:
                             key_obj['defaultValue'] = parsed
                             keybind_converted += 1
-                            print(f"   ✅ Keybind: {parsed['key']} = {parsed['action']}")
+                            modifiers_str = '+'.join(parsed['keyCombo']['modifiers']) + '+' if parsed['keyCombo']['modifiers'] else ''
+                            print(f"   ✅ Keybind: {modifiers_str}{parsed['keyCombo']['key']} = {parsed['action']}")
                         else:
                             print(f"   ❌ Failed to parse keybind: {default_value}")
+
+                    # Convert old format {"key": "...", "action": "..."} to new format
+                    elif default_value and isinstance(default_value, dict) and 'key' in default_value and 'keyCombo' not in default_value:
+                        key_combo = parse_key_combo(default_value['key'])
+                        key_obj['defaultValue'] = {
+                            'keyCombo': key_combo,
+                            'action': default_value['action']
+                        }
+                        keybind_converted += 1
+                        modifiers_str = '+'.join(key_combo['modifiers']) + '+' if key_combo['modifiers'] else ''
+                        print(f"   ✅ Keybind: {modifiers_str}{key_combo['key']} = {default_value['action']}")
 
     # Write updated schema
     print(f"\n💾 Writing updated schema to {schema_file}...")

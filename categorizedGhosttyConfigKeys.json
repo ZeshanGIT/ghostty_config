@@ -117,7 +117,8 @@
             },
             {
               "key": "palette",
-              "valueType": "color"
+              "valueType": "color",
+              "repeatable": true
             },
             {
               "key": "cursor-color",
