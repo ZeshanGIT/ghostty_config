@@ -173,6 +173,32 @@ pnpm test:parser
 - Add new property (appends at end)
 - Remove property (deletes line)
 
+## Documentation Policy
+
+### When to Create New Documentation Files
+
+**DO NOT create separate .md files for:**
+
+- ✅ Status updates (use chat messages)
+- ✅ Completion reports (use ✅ checkmarks in IMPLEMENTATION_PLAN.md)
+- ✅ Verification/alignment documents (mention in chat)
+- ✅ Progress tracking (use TodoWrite tool + chat)
+
+**ONLY create new .md files when ALL of these are true:**
+
+1. Many checklist items (5+ items with complexity)
+2. Significant problems requiring user attention (blocking issues, critical decisions)
+3. Cannot be handled with a chat message or simple checklist
+
+**Standard practice:**
+
+- Phase completion → Add ✅ to IMPLEMENTATION_PLAN.md
+- Quick updates → Chat message
+- Work progress → TodoWrite tool
+- Issues found → Mention in chat (create doc only if blocking + needs decisions)
+
+**Key principle:** "When in doubt, don't create a file. Chat or IMPLEMENTATION_PLAN.md is usually enough."
+
 ## Important Notes
 
 - **Always use pnpm** - Never use npm or yarn for this project
