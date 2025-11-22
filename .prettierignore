@@ -1,0 +1,8 @@
+dist
+node_modules
+src-tauri
+ghostty_configs
+*.py
+*.properties
+*.txt
+pnpm-lock.yaml
