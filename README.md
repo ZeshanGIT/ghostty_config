@@ -69,17 +69,27 @@ The built application will be available in `src-tauri/target/release/`.
 
 ```
 ghostty_config/
-├── src/                    # React application source
-│   ├── components/         # React components
-│   │   └── ui/            # shadcn/ui components
-│   ├── hooks/             # Custom React hooks
-│   ├── lib/               # Utility libraries
-│   ├── stores/            # Zustand state stores
-│   ├── types/             # TypeScript type definitions
-│   └── App.tsx            # Main application component
-├── src-tauri/             # Tauri Rust backend
-├── ghostty_configs/       # Configuration property files
-└── public/                # Static assets
+├── src/                          # React application source
+│   ├── components/               # React components
+│   │   └── ui/                  # shadcn/ui components
+│   ├── hooks/                   # Custom React hooks
+│   ├── lib/                     # Utility libraries
+│   ├── stores/                  # Zustand state stores
+│   ├── types/                   # TypeScript type definitions
+│   └── App.tsx                  # Main application component
+├── src-tauri/                   # Tauri Rust backend
+├── scripts/                     # Utility scripts
+│   ├── archive/                 # Archived source files
+│   ├── *.py                     # Python scripts (schema generation, validation)
+│   └── *.ts                     # TypeScript scripts
+├── docs/                        # Documentation
+│   ├── phase-completion/        # Phase milestone docs
+│   ├── SCHEMA_ENRICHMENT.md     # Schema enrichment guide
+│   ├── ENRICHMENT_COMPLETE.md   # Enrichment summary
+│   └── VERIFICATION_COMPLETE.md # Validation results
+├── ghostty_configs/             # Legacy config property files
+├── public/                      # Static assets
+└── ghosttyConfigSchema.json     # Main configuration schema
 ```
 
 ## Tech Stack
@@ -101,9 +111,14 @@ ghostty_config/
 
 ## Documentation
 
-- See `VISION.md` for the complete project vision
-- See `IMPLEMENTATION_PLAN.md` for the detailed implementation roadmap
-- See `CLAUDE.md` for development guidelines and architecture details
+- **[CLAUDE.md](./CLAUDE.md)** - Development guidelines and project instructions
+- **[docs/](./docs/)** - Comprehensive documentation
+  - [Schema Enrichment Guide](./docs/SCHEMA_ENRICHMENT.md)
+  - [Enrichment Summary](./docs/ENRICHMENT_COMPLETE.md)
+  - [Verification Results](./docs/VERIFICATION_COMPLETE.md)
+  - [Technical Decisions](./docs/TECHNICAL_DECISIONS.md)
+  - [Phase Completion Docs](./docs/phase-completion/)
+- **[scripts/](./scripts/)** - Utility scripts documentation
 
 ## Recommended IDE Setup
 
