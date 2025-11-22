@@ -17,6 +17,7 @@
     "type-check": "tsc --noEmit",
     "generate:schema": "tsx scripts/generateSchema.ts",
     "test:parser": "tsx scripts/testParser.ts",
+    "test:schema": "tsx scripts/testSchema.ts",
     "prepare": "husky"
   },
   "lint-staged": {

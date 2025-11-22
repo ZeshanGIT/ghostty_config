@@ -12,7 +12,7 @@ The project contains:
 - Python scripts for parsing and organizing Ghostty configuration documentation
 - Structured `.properties` files organized by category (appearance, input, terminal, window, UI, platform, system, notifications, config)
 - Source documentation extracted from Ghostty's official documentation (`ghostty_docs.txt`)
-- A comprehensive vision document (`VISION.md`) and implementation plan (`IMPLEMENTATION_PLAN.md`)
+- Technical architecture decisions documented in `docs/TECHNICAL_DECISIONS.md`
 
 ## Package Manager
 
@@ -224,8 +224,6 @@ pnpm test:parser
 - ✅ All TypeScript types valid and ESLint passing (0 errors)
 
 **Next Phase**: Phase 4 - Advanced Features & Testing
-
-See `PHASE3_COMPLETE.md` for detailed documentation.
 
 ## Development Workflow
 

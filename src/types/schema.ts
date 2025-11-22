@@ -52,7 +52,7 @@ export interface Section {
   id: string;
   label: string;
   description?: string;
-  items: Item[];
+  keys: Item[]; // Note: JSON uses "keys" not "items"
 }
 
 // ============================================
@@ -74,7 +74,7 @@ interface BaseConfigProperty {
   type: 'config';
   key: string;
   label: string;
-  description: string;
+  description?: string; // Optional in JSON schema
   required: boolean;
   repeatable: boolean;
   deprecated?: boolean;
