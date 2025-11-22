@@ -1374,7 +1374,13 @@
               "valueType": "keybinding",
               "required": false,
               "repeatable": true,
-              "defaultValue": "super+d=new_split:right"
+              "defaultValue": {
+                "keyCombo": {
+                  "modifiers": ["super"],
+                  "key": "d"
+                },
+                "action": "new_split:right"
+              }
             }
           ]
         },
@@ -1949,10 +1955,14 @@
             {
               "type": "config",
               "key": "command-palette-entry",
-              "valueType": "repeatable-text",
+              "valueType": "command",
               "required": false,
               "repeatable": true,
-              "defaultValue": "title:\"Undo\",description:\"Undo the last action.\",action:\"undo\""
+              "defaultValue": {
+                "title": "Undo",
+                "description": "Undo the last action.",
+                "action": "undo"
+              }
             }
           ]
         },
