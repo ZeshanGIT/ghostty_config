@@ -6,7 +6,7 @@
  */
 
 import type { ParsedConfigFile } from '@/types/config';
-import type { PropertyMap } from '@/types/schema';
+import type { PropertyMap } from '@/lib/schemaQueries';
 
 export interface SaveOptions {
   /** Properties that have been modified (key -> new value) */
@@ -61,7 +61,7 @@ export function saveConfigFile(parsedFile: ParsedConfigFile, options: SaveOption
       if (modifiedProperties.has(key)) {
         const newValue = modifiedProperties.get(key)!;
         const propertyDef = propertyMap?.get(key);
-        const isRepeatable = propertyDef?.isRepeatable || false;
+        const isRepeatable = propertyDef?.repeatable || false;
 
         if (isRepeatable && Array.isArray(newValue)) {
           // Repeatable property - handle specially
@@ -101,7 +101,7 @@ export function saveConfigFile(parsedFile: ParsedConfigFile, options: SaveOption
 
     for (const [key, value] of newProperties) {
       const propertyDef = propertyMap?.get(key);
-      const isRepeatable = propertyDef?.isRepeatable || false;
+      const isRepeatable = propertyDef?.repeatable || false;
 
       if (isRepeatable && Array.isArray(value)) {
         // Add all values for repeatable property

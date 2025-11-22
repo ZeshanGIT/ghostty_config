@@ -81,8 +81,9 @@ export function getCommentForProperty(schema: GhosttyConfigSchema, key: string):
         // Found the property
         if (isConfigProperty(item) && item.key === key) {
           // Check if previous item is a comment
-          if (i > 0 && isCommentBlock(section.keys[i - 1])) {
-            return section.keys[i - 1].content;
+          const prevItem = section.keys[i - 1];
+          if (i > 0 && isCommentBlock(prevItem)) {
+            return prevItem.content;
           }
           return null;
         }
@@ -324,4 +325,28 @@ export function groupPropertiesByTab(
   }
 
   return grouped;
+}
+
+/**
+ * Property map type for quick lookup
+ */
+export type PropertyMap = Map<string, ConfigProperty>;
+
+/**
+ * Creates a property map for O(1) lookups by key
+ */
+export function createPropertyMap(schema: GhosttyConfigSchema): PropertyMap {
+  const map = new Map<string, ConfigProperty>();
+
+  for (const tab of schema.tabs) {
+    for (const section of tab.sections) {
+      for (const item of section.keys) {
+        if (isConfigProperty(item)) {
+          map.set(item.key, item);
+        }
+      }
+    }
+  }
+
+  return map;
 }

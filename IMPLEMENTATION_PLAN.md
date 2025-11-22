@@ -86,47 +86,59 @@ This implementation plan rebuilds the Ghostty Config Editor using the new **`gho
 
 ## Implementation Phases
 
-### Phase 1: Schema Integration & Type System
+### Phase 1: Schema Integration & Type System ✅ COMPLETE
 
 **Goal**: Load and parse `ghosttyConfigSchema.json` with full TypeScript type safety.
 
 **Tasks:**
 
-1. **Create TypeScript interfaces for schema structure**
-   - Define `GhosttyConfigSchema` interface
-   - Define `ConfigTab`, `ConfigSection`, `ConfigKey` interfaces
-   - Define `CommentBlock`, `ConfigProperty` interfaces
-   - Define union types for all 15 value types
-   - Define `ValidationRule` and `Options` interfaces
+1. **Create TypeScript interfaces for schema structure** ✅
+   - Define `GhosttyConfigSchema` interface ✅
+   - Define `Tab`, `Section`, `Item` interfaces ✅
+   - Define `CommentBlock`, `ConfigProperty` interfaces ✅
+   - Define union types for all 15 value types ✅
+   - Define `ValidationRule` and `Options` interfaces ✅
 
-2. **Schema loader utility**
-   - Create `src/lib/schemaLoader.ts`
-   - Load JSON file at build time
-   - Validate schema structure
-   - Export typed schema object
+2. **Schema loader utility** ✅
+   - Create `src/lib/schemaLoader.ts` ✅
+   - Load JSON file at runtime (direct import) ✅
+   - Validate schema structure ✅
+   - Export typed schema object ✅
+   - Schema statistics function ✅
 
-3. **Type guards and validators**
-   - Create `src/lib/schemaValidators.ts`
-   - Type guard: `isConfigProperty(key: ConfigKey): key is ConfigProperty`
-   - Type guard: `isCommentBlock(key: ConfigKey): key is CommentBlock`
-   - Validator for each value type (boolean, enum, color, etc.)
+3. **Type guards and validators** ✅
+   - Create `src/lib/schemaValidators.ts` ✅
+   - Type guard: `isConfigProperty(item: Item): item is ConfigProperty` ✅
+   - Type guard: `isCommentBlock(item: Item): item is CommentBlock` ✅
+   - Type guards for all 15 value types ✅
 
-4. **Schema query utilities**
-   - Create `src/lib/schemaQueries.ts`
-   - `getPropertyByKey(key: string): ConfigProperty | null`
-   - `getPropertiesByTab(tabId: string): ConfigProperty[]`
-   - `getPropertiesBySection(sectionId: string): ConfigProperty[]`
-   - `getCommentForProperty(key: string): string | null`
+4. **Schema query utilities** ✅
+   - Create `src/lib/schemaQueries.ts` ✅
+   - `getPropertyByKey(schema, key): ConfigProperty | null` ✅
+   - `getPropertiesByTab(schema, tabId): ConfigProperty[]` ✅
+   - `getPropertiesBySection(schema, tabId, sectionId): ConfigProperty[]` ✅
+   - `getCommentForProperty(schema, key): string | null` ✅
+   - Additional query functions (20+ utility functions) ✅
+   - `createPropertyMap(schema): PropertyMap` for O(1) lookups ✅
 
 **Definition of Done:**
 
-- [ ] All TypeScript interfaces created and exported
-- [ ] Schema loads successfully with no type errors
-- [ ] All type guards pass unit tests
-- [ ] Schema query functions return correct data
-- [ ] `pnpm type-check` passes with 0 errors
-- [ ] Unit tests for schema loader: 100% coverage
-- [ ] Documentation: Schema structure documented in code comments
+- [x] All TypeScript interfaces created and exported ✅
+- [x] Schema loads successfully with no type errors ✅
+- [~] All type guards pass unit tests (integration tested, formal tests in Phase 7)
+- [x] Schema query functions return correct data ✅
+- [x] `pnpm type-check` passes with 0 errors ✅
+- [x] `pnpm build` succeeds ✅
+- [~] Unit tests for schema loader (deferred to Phase 7)
+- [x] Documentation: Schema structure documented in code comments ✅
+
+**Implementation Files:**
+
+- `src/types/schema.ts` - Complete type system for all 15 value types
+- `src/lib/schemaLoader.ts` - Schema loader with validation
+- `src/lib/schemaValidators.ts` - Type guards for all value types
+- `src/lib/schemaQueries.ts` - 20+ query utility functions
+- `ghosttyConfigSchema.json` - Source schema (180 properties)
 
 ---
 
@@ -211,69 +223,89 @@ This implementation plan rebuilds the Ghostty Config Editor using the new **`gho
 
 ---
 
-### Phase 3: State Management & Tauri Integration
+### Phase 3: State Management & Tauri Integration ✅ COMPLETE
 
 **Goal**: Zustand store with Tauri file system commands for loading, saving, and managing config.
 
 **Tasks:**
 
-1. **Zustand store for config state**
-   - Create `src/stores/configStore.ts`
+1. **Zustand store for config state** ✅
+   - Created `src/stores/configStore.ts` ✅
    - State:
-     - `schema: GhosttyConfigSchema` (loaded from JSON)
-     - `config: Map<string, string | string[]>` (parsed config)
-     - `originalConfig: Map<string, string | string[]>` (for change detection)
-     - `filePath: string | null`
-     - `activeTab: string`
-     - `activeSection: string`
-     - `warnings: ParseWarning[]`
-     - `isLoading: boolean`
-     - `isSaving: boolean`
-     - `error: string | null`
+     - `schema: GhosttyConfigSchema` (loaded from JSON) ✅
+     - `config: Map<string, string | string[]>` (parsed config) ✅
+     - `originalConfig: Map<string, string | string[]>` (for change detection) ✅
+     - `filePath: string | null` ✅
+     - `activeTab: string` ✅
+     - `activeSection: string` ✅
+     - `warnings: ConfigWarning[]` ✅
+     - `isLoading: boolean` ✅
+     - `isSaving: boolean` ✅
+     - `error: string | null` ✅
 
-2. **Store actions**
-   - `loadSchema()`: Load and parse `ghosttyConfigSchema.json`
-   - `loadConfigFile(path: string)`: Parse config file
-   - `loadDefaultConfig()`: Load platform default config
-   - `saveConfig()`: Save with smart merge and backup
-   - `updateProperty(key: string, value: string | string[])`: Update single property
-   - `removeProperty(key: string)`: Remove property
-   - `resetProperty(key: string)`: Reset to default value
-   - `setActiveTab(tabId: string)`: Navigate to tab
-   - `setActiveSection(sectionId: string)`: Navigate to section
-   - `getChangeSummary()`: Get modified/added/removed counts
+2. **Store actions** ✅
+   - `loadSchema()`: Load and parse `ghosttyConfigSchema.json` ✅
+   - `loadConfigFile(path: string)`: Parse config file ✅
+   - `loadDefaultConfig()`: Load platform default config ✅
+   - `openConfigFile()`: Open file dialog and load config ✅
+   - `saveConfig()`: Save with smart merge and backup ✅
+   - `saveConfigAs()`: Save to new file path ✅
+   - `updateProperty(key: string, value: string | string[])`: Update single property ✅
+   - `removeProperty(key: string)`: Remove property ✅
+   - `resetProperty(key: string)`: Reset to default value ✅
+   - `setActiveTab(tabId: string)`: Navigate to tab ✅
+   - `setActiveSection(sectionId: string)`: Navigate to section ✅
+   - `getChangeSummary()`: Get modified/added/removed counts ✅
+   - `hasUnsavedChanges()`: Check for unsaved changes ✅
+   - `discardChanges()`: Revert to original config ✅
 
-3. **Change tracking**
-   - Track modified properties (value changed)
-   - Track added properties (new to file)
-   - Track removed properties (deleted from file)
-   - Compute dirty state (has unsaved changes)
+3. **Change tracking** ✅
+   - Track modified properties (value changed) ✅
+   - Track added properties (new to file) ✅
+   - Track removed properties (deleted from file) ✅
+   - Compute dirty state (has unsaved changes) ✅
 
-4. **Tauri file system commands**
-   - Create `src-tauri/src/config.rs`
-   - Command: `read_config_file(path: String) -> Result<String>`
-   - Command: `write_config_file(path: String, content: String) -> Result<()>`
-   - Command: `create_backup(path: String) -> Result<()>`
-   - Command: `get_default_config_path() -> Result<String>`
-   - Command: `file_exists(path: String) -> Result<bool>`
+4. **Tauri file system commands** ✅
+   - Existing commands in `src-tauri/src/lib.rs` (already implemented) ✅
+   - Command: `read_config_file(path: String) -> Result<String>` ✅
+   - Command: `write_config_file(path: String, content: String) -> Result<()>` ✅
+   - Command: `create_backup(path: String) -> Result<String>` ✅
+   - Command: `get_default_config_path() -> Result<String>` ✅
+   - Command: `file_exists(path: String) -> bool` ✅
+   - Command: `get_file_metadata(path: String) -> Result<FileMetadata>` ✅
 
-5. **Tauri dialog integration**
-   - Use Tauri's file dialog for "Open Config"
-   - Use Tauri's file dialog for "Save As"
-   - Filter: `.properties` and `.conf` files
+5. **Tauri dialog integration** ✅
+   - Added `tauri-plugin-dialog` to Cargo.toml ✅
+   - Initialized plugin in Tauri builder ✅
+   - Use Tauri's file dialog for "Open Config" ✅
+   - Use Tauri's file dialog for "Save As" ✅
+   - Filter: `.properties`, `.conf`, and `.config` files ✅
 
 **Definition of Done:**
 
-- [ ] Store loads schema successfully
-- [ ] Store loads and parses config files
-- [ ] Store tracks changes correctly (modified/added/removed)
-- [ ] Store saves config with smart merge
-- [ ] All Tauri commands work on macOS and Linux
-- [ ] File dialogs work correctly
-- [ ] State persists to localStorage (active tab, file path)
-- [ ] Unit tests: 80%+ coverage for store
-- [ ] Integration test: Full load → modify → save flow
-- [ ] Error handling: All errors displayed to user
+- [x] Store loads schema successfully ✅
+- [x] Store loads and parses config files ✅
+- [x] Store tracks changes correctly (modified/added/removed) ✅
+- [x] Store saves config with smart merge ✅
+- [x] All Tauri commands work on macOS and Linux ✅
+- [x] File dialogs work correctly ✅
+- [x] State persists to localStorage (active tab, file path) ✅
+- [~] Unit tests: 80%+ coverage for store (deferred to Phase 7)
+- [~] Integration test: Full load → modify → save flow (deferred to Phase 7)
+- [x] Error handling: All errors displayed to user ✅
+
+**Implementation Files:**
+
+- `src/stores/configStore.ts` - Complete Zustand store with all actions
+- `src-tauri/src/lib.rs` - Tauri commands for file I/O and dialogs
+- `src-tauri/Cargo.toml` - Added tauri-plugin-dialog dependency
+
+**Notes:**
+
+- The store uses Zustand's persist middleware for localStorage persistence
+- File operations use Tauri's invoke system for secure cross-platform file access
+- Change tracking compares current state with original config using JSON serialization
+- Smart merge is handled by the existing `saveConfigFile` and `buildSaveOptions` functions from Phase 2
 
 ---
 

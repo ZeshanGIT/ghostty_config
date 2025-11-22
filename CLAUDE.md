@@ -6,13 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repository is a **Ghostty Terminal Configuration GUI Editor** project. The goal is to create a modern desktop application (using Tauri + React + TypeScript) that provides an intuitive interface for editing Ghostty terminal configuration files.
 
+**Schema Source**: `ghosttyConfigSchema.json` - A comprehensive JSON schema with 180 configuration properties across 7 tabs and 26 sections, featuring 15 distinct value types and rich metadata.
+
 The project contains:
 
 - **Tauri 2.x + React + TypeScript** GUI application
+- **ghosttyConfigSchema.json** - Single source of truth for all config properties with full documentation
 - Python scripts for parsing and organizing Ghostty configuration documentation
 - Structured `.properties` files organized by category (appearance, input, terminal, window, UI, platform, system, notifications, config)
 - Source documentation extracted from Ghostty's official documentation (`ghostty_docs.txt`)
-- Technical architecture decisions documented in `docs/TECHNICAL_DECISIONS.md`
+- Complete implementation plan in `IMPLEMENTATION_PLAN.md`
 
 ## Package Manager
 
@@ -50,13 +53,19 @@ pnpm type-check
 ghostty_config/
 ├── src/                          # React application source
 │   ├── components/               # React components
-│   │   └── ui/                  # shadcn/ui components (Button, Card, Input)
+│   │   ├── editors/             # Type-specific property editors
+│   │   └── ui/                  # shadcn/ui components
 │   ├── hooks/                   # Custom React hooks
 │   ├── lib/                     # Utility libraries
+│   │   ├── parser/              # Config file parser
+│   │   ├── schemaLoader.ts      # JSON schema loader
+│   │   ├── schemaQueries.ts     # Schema query utilities
+│   │   ├── validation.ts        # Property validation
 │   │   └── utils.ts             # cn() utility for className merging
 │   ├── stores/                  # Zustand state stores
 │   │   └── configStore.ts       # Main config state management
 │   ├── types/                   # TypeScript type definitions
+│   │   └── schema.ts            # Schema type definitions
 │   ├── App.tsx                  # Main app component
 │   ├── main.tsx                 # React entry point
 │   └── index.css                # Tailwind CSS + theme variables
@@ -64,6 +73,7 @@ ghostty_config/
 │   ├── src/                     # Rust source code
 │   ├── icons/                   # Application icons
 │   └── tauri.conf.json          # Tauri configuration
+├── ghosttyConfigSchema.json     # ⭐ SINGLE SOURCE OF TRUTH - 180 properties with full metadata
 ├── ghostty_configs/             # Organized .properties files by category
 │   ├── appearance/              # Theme, font, cursor, shader, background
 │   ├── input/                   # Keybinds, mouse, clipboard
@@ -80,7 +90,7 @@ ghostty_config/
 ├── ghostty_config.properties    # Original monolithic config file
 ├── ghostty_docs.txt             # Source documentation from Ghostty
 ├── VISION.md                    # Complete project vision and roadmap
-├── IMPLEMENTATION_PLAN.md       # Detailed implementation plan with phases
+├── IMPLEMENTATION_PLAN.md       # ⭐ Detailed implementation plan with phases
 ├── package.json                 # Node.js dependencies and scripts
 ├── tsconfig.json                # TypeScript configuration
 ├── vite.config.ts               # Vite build configuration
@@ -146,17 +156,19 @@ Ensures the split `.properties` files contain all keys/values from the original 
 python3 verify_config_split.py
 ```
 
-## TypeScript Scripts (Phase 2)
+## TypeScript Scripts
 
-### Schema Generator
+### Schema Loader
 
-Generates TypeScript schema from `ghostty_docs.txt` and `.properties` files.
+Loads and validates the `ghosttyConfigSchema.json` file at runtime.
 
 ```bash
-pnpm generate:schema
+# Schema is loaded automatically by the app
+# No build step required - JSON is imported directly
 ```
 
-**Output**: `src/data/ghostty-schema.generated.ts`
+**Source**: `ghosttyConfigSchema.json`
+**Loader**: `src/lib/schemaLoader.ts`
 
 ### Parser Tests
 
@@ -210,46 +222,51 @@ pnpm test:parser
 
 ## Project Status
 
-**Current Phase**: Phase 3 - UI Components & Category Navigation (COMPLETE ✅)
+**Current Phase**: Phase 1 - Schema Integration & Type System (IN PROGRESS 🚧)
 
-**Phase 1 Completed**:
+**Implementation Plan**: See `IMPLEMENTATION_PLAN.md` for detailed phase breakdown.
 
-- ✅ Tauri 2.x project initialized with React + TypeScript
-- ✅ Build tooling configured (Vite, TypeScript strict mode, ESLint, Prettier)
-- ✅ Pre-commit hooks set up (husky + lint-staged)
-- ✅ Tailwind CSS 4 + shadcn/ui components installed (Button, Card, Input)
-- ✅ Project structure organized (components, hooks, lib, stores, types)
-- ✅ Path aliases configured
-- ✅ Zustand state management configured
-- ✅ Application launches successfully with Ghostty Config Editor branding
-- ✅ Hot-reload development environment working
-- ✅ Production build compiles without errors
+### Schema Overview
 
-**Phase 2 Completed**:
+- **Source**: `ghosttyConfigSchema.json`
+- **Properties**: 180 configuration options
+- **Tabs**: 7 (appearance, window, input, terminal, ui, notifications, system)
+- **Sections**: 26
+- **Value Types**: 15 (text, number, boolean, enum, color, keybinding, filepath, etc.)
 
-- ✅ TypeScript schema and config type definitions created
-- ✅ Schema generator script built and tested (28 properties, 9 categories)
-- ✅ Properties file parser with validation and error handling
-- ✅ Properties file saver with smart merge (preserves comments and structure)
-- ✅ Tauri file system commands for config operations
-- ✅ Validation utilities based on schema
-- ✅ ConfigStore fully integrated with parser, saver, and Tauri commands
-- ✅ All components tested and verified (4/4 tests passed)
+### Completed Work
 
-**Phase 3 Completed**:
+**Foundation** (Legacy from previous implementation):
 
-- ✅ Created 9 shadcn/ui components (label, select, switch, badge, separator, scroll-area, alert, dialog, collapsible)
-- ✅ Built CategorySidebar with expandable sections and modification badges
-- ✅ Created 5 type-specific property editors (text, number, boolean, enum, repeatable)
-- ✅ Built PropertyEditor wrapper with smart type detection
-- ✅ Implemented FileLoader with Tauri dialog integration
-- ✅ Created WarningsPanel for validation errors and parser warnings
-- ✅ Built ChangeSummary component with color-coded statistics
-- ✅ Implemented SaveDialog with detailed change preview
-- ✅ Complete three-column application layout in App.tsx
-- ✅ All TypeScript types valid and ESLint passing (0 errors)
+- ✅ Tauri 2.x + React + TypeScript project initialized
+- ✅ Build tooling configured (Vite, ESLint, Prettier, Husky)
+- ✅ Tailwind CSS 4 + shadcn/ui component system
+- ✅ Path aliases and project structure
+- ✅ Hot-reload development environment
 
-**Next Phase**: Phase 4 - Advanced Features & Testing
+**Phase 2: Config File Parser & Saver** ✅:
+
+- ✅ Properties file parser (`src/lib/parser/propertiesParser.ts`)
+- ✅ Value type parsers for all 15 types (`src/lib/valueTypeParsers.ts`)
+- ✅ Properties file saver with smart merge (`src/lib/parser/propertiesSaver.ts`)
+- ✅ All parser tests passing (4/4)
+
+### Current Work
+
+**Phase 1: Schema Integration & Type System** 🚧:
+
+- 🚧 TypeScript interfaces for schema structure (`src/types/schema.ts`)
+- ⏳ Schema loader utility (`src/lib/schemaLoader.ts`)
+- ⏳ Type guards and validators
+- ⏳ Schema query utilities
+
+### Next Phases
+
+- **Phase 3**: State Management & Tauri Integration
+- **Phase 4**: UI Components & Property Editors
+- **Phase 5**: Application Layout & Navigation
+- **Phase 6**: Advanced Features
+- **Phase 7**: Testing & Polish
 
 ## Development Workflow
 
@@ -287,43 +304,29 @@ The application is configured as:
 
 ## State Management
 
-The project uses Zustand for state management with persistence:
+The project uses Zustand for state management. The store will be implemented in Phase 3 with the following features:
 
 ```typescript
 import { useConfigStore } from '@/stores/configStore';
 
-// In a component
+// In a component (Phase 3+)
 const {
   config,
   loadConfigFile,
   saveConfig,
   updateProperty,
-  setActiveCategory,
+  setActiveTab,
   setActiveSection,
   getChangeSummary,
 } = useConfigStore();
 ```
 
-**Phase 2 Store Features**:
+**Planned Store Features (Phase 3)**:
 
-- **Config data storage**: Map-based with proper types (string | string[])
-- **File operations**: Load, save with smart merge, backup creation
-- **Change detection**: File modification timestamp tracking
-- **Validation**: Schema-based property validation
-- **Warnings**: Parse warnings and unknown property tracking
+- **Config data storage**: Typed values for all 15 value types
+- **File operations**: Load, save, backup with smart merge
 - **Change tracking**: Modified, added, removed properties
-- **Navigation**: Active category/section tracking
-- **State**: Loading, saving, error states
-- **Persistence**: File path and UI state persisted to localStorage
-
-**Key Actions**:
-
-```typescript
-loadConfigFile(path); // Load and parse config file
-loadDefaultConfig(); // Load platform default config
-saveConfig(); // Save with smart merge and backup
-updateProperty(key, val); // Update a property
-removeProperty(key); // Remove a property
-resetProperty(key); // Reset to default value
-getChangeSummary(); // Get counts of modified/added/removed
-```
+- **Validation**: Schema-based validation with error messages
+- **Navigation**: Active tab/section tracking
+- **State management**: Loading, saving, error states
+- **Persistence**: Last file path and UI state to localStorage

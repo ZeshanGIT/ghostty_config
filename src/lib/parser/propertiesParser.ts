@@ -12,7 +12,8 @@ import type {
   InvalidLine,
   ConfigWarning,
 } from '@/types/config';
-import type { PropertyMap } from '@/types/schema';
+import type { PropertyMap } from '@/lib/schemaQueries';
+import type { ConfigProperty } from '@/types/schema';
 
 /**
  * Parse a single line from a config file
@@ -99,7 +100,7 @@ export function parseConfigFile(content: string, propertyMap?: PropertyMap): Par
 
       // Check if property is repeatable
       const propertyDef = propertyMap?.get(key);
-      const isRepeatable = propertyDef?.isRepeatable || false;
+      const isRepeatable = propertyDef?.repeatable || false;
 
       if (isRepeatable) {
         // Repeatable property - store as array
@@ -171,46 +172,47 @@ export function parseConfigFile(content: string, propertyMap?: PropertyMap): Par
 /**
  * Validate a property value against its schema definition
  */
-function validatePropertyValue(
-  propertyDef: {
-    type: string;
-    validation?: { min?: number; max?: number; enum?: string[]; pattern?: string };
-  },
-  value: string
-): string | null {
-  const { type, validation } = propertyDef;
+function validatePropertyValue(propertyDef: ConfigProperty, value: string): string | null {
+  const { valueType, validation } = propertyDef;
 
   // Type validation
-  if (type === 'number') {
+  if (valueType === 'number') {
     const num = parseFloat(value);
     if (isNaN(num)) {
       return `Expected a number, got '${value}'`;
     }
 
-    if (validation?.min !== undefined && num < validation.min) {
+    if (validation && 'min' in validation && validation.min !== undefined && num < validation.min) {
       return `Value ${num} is below minimum ${validation.min}`;
     }
 
-    if (validation?.max !== undefined && num > validation.max) {
+    if (validation && 'max' in validation && validation.max !== undefined && num > validation.max) {
       return `Value ${num} is above maximum ${validation.max}`;
     }
   }
 
-  if (type === 'boolean') {
+  if (valueType === 'boolean') {
     const lower = value.toLowerCase();
     if (lower !== 'true' && lower !== 'false') {
       return `Expected 'true' or 'false', got '${value}'`;
     }
   }
 
-  if (type === 'enum') {
-    if (validation?.enum && !validation.enum.includes(value)) {
-      return `Value '${value}' is not one of: ${validation.enum.join(', ')}`;
+  if (valueType === 'enum' && propertyDef.valueType === 'enum') {
+    const enumValues = propertyDef.options.values.map(v => v.value);
+    if (!propertyDef.options.allowCustom && !enumValues.includes(value)) {
+      return `Value '${value}' is not one of: ${enumValues.join(', ')}`;
     }
   }
 
-  // Pattern validation
-  if (validation?.pattern) {
+  // Pattern validation (for text types)
+  if (
+    valueType === 'text' &&
+    propertyDef.valueType === 'text' &&
+    validation &&
+    'pattern' in validation &&
+    validation.pattern
+  ) {
     try {
       const regex = new RegExp(validation.pattern);
       if (!regex.test(value)) {

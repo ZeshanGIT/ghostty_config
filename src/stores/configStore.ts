@@ -1,84 +1,115 @@
 /**
- * Config Store
+ * Zustand Store for Ghostty Configuration
  *
- * Zustand store for managing Ghostty configuration state
+ * Manages the application state for loading, editing, and saving Ghostty config files.
  */
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { ParsedConfigFile, ConfigWarning } from '@/types/config';
+import type { GhosttyConfigSchema, ConfigProperty } from '@/types/schema';
+import type { ConfigWarning, ParsedConfigFile } from '@/types/config';
+import { loadSchema } from '@/lib/schemaLoader';
 import { parseConfigFile } from '@/lib/parser/propertiesParser';
-import {
-  saveConfigFile,
-  buildSaveOptions,
-  getChangeSummary,
-  type ChangeSummary,
-} from '@/lib/parser/propertiesSaver';
-import { PROPERTY_MAP } from '@/data/ghostty-schema.generated';
-import {
-  readConfigFile,
-  writeConfigFile,
-  getFileMetadata,
-  createBackup,
-  getDefaultConfigPath,
-} from '@/lib/tauri/fileCommands';
+import { saveConfigFile, buildSaveOptions } from '@/lib/parser/propertiesSaver';
+import { createPropertyMap } from '@/lib/schemaQueries';
+import { invoke } from '@tauri-apps/api/core';
+import { open, save } from '@tauri-apps/plugin-dialog';
 
-interface ConfigState {
-  // Current configuration values (property key -> value)
-  config: Map<string, string | string[]>;
-
-  // Parsed config file (for saving back with smart merge)
-  parsedFile: ParsedConfigFile | null;
-
-  // Path to the currently loaded config file
-  filePath: string | null;
-
-  // Timestamp when file was loaded
-  loadedTimestamp: number | null;
-
-  // Properties that have been modified by user
-  modifiedProperties: Set<string>;
-
-  // Active category and section for navigation
-  activeCategory: string | null;
-  activeSection: string | null;
-
-  // Loading/saving state
-  isLoading: boolean;
-  isSaving: boolean;
-  error: string | null;
-
-  // Warnings from parser
-  warnings: ConfigWarning[];
-
-  // Actions
-  loadConfigFile: (path: string) => Promise<void>;
-  loadDefaultConfig: () => Promise<void>;
-  saveConfig: () => Promise<void>;
-  updateProperty: (key: string, value: string | string[]) => void;
-  removeProperty: (key: string) => void;
-  setActiveCategory: (category: string | null) => void;
-  setActiveSection: (section: string | null) => void;
-  resetProperty: (key: string) => void;
-  resetAll: () => void;
-  getChangeSummary: () => ChangeSummary;
-  clearError: () => void;
+/**
+ * Change summary for modified properties
+ */
+export interface ChangeSummary {
+  modified: string[]; // Properties that have changed value
+  added: string[]; // Properties added to config
+  removed: string[]; // Properties removed from config
 }
 
-export const useConfigStore = create<ConfigState>()(
+/**
+ * Main store state
+ */
+interface ConfigStoreState {
+  // Schema
+  schema: GhosttyConfigSchema | null;
+  schemaLoaded: boolean;
+
+  // Config data
+  config: Map<string, string | string[]>;
+  originalConfig: Map<string, string | string[]>;
+  parsedFile: ParsedConfigFile | null;
+
+  // File metadata
+  filePath: string | null;
+  lastSavedTimestamp: number | null;
+
+  // Navigation
+  activeTab: string;
+  activeSection: string;
+
+  // Warnings and errors
+  warnings: ConfigWarning[];
+  error: string | null;
+
+  // Loading states
+  isLoading: boolean;
+  isSaving: boolean;
+
+  // Actions
+  loadSchema: () => Promise<void>;
+  loadConfigFile: (path: string) => Promise<void>;
+  loadDefaultConfig: () => Promise<void>;
+  openConfigFile: () => Promise<void>;
+  saveConfig: () => Promise<void>;
+  saveConfigAs: () => Promise<void>;
+  updateProperty: (key: string, value: string | string[]) => void;
+  removeProperty: (key: string) => void;
+  resetProperty: (key: string) => void;
+  setActiveTab: (tabId: string) => void;
+  setActiveSection: (sectionId: string) => void;
+  getChangeSummary: () => ChangeSummary;
+  hasUnsavedChanges: () => boolean;
+  discardChanges: () => void;
+}
+
+/**
+ * Helper: Get default value for a property from schema
+ */
+function getDefaultValue(property: ConfigProperty): string | string[] | null {
+  return property.defaultValue as string | string[] | null;
+}
+
+/**
+ * Create the Zustand store
+ */
+export const useConfigStore = create<ConfigStoreState>()(
   persist(
     (set, get) => ({
+      // Initial state
+      schema: null,
+      schemaLoaded: false,
       config: new Map(),
+      originalConfig: new Map(),
       parsedFile: null,
       filePath: null,
-      loadedTimestamp: null,
-      modifiedProperties: new Set(),
-      activeCategory: null,
-      activeSection: null,
+      lastSavedTimestamp: null,
+      activeTab: 'appearance',
+      activeSection: 'font',
+      warnings: [],
+      error: null,
       isLoading: false,
       isSaving: false,
-      error: null,
-      warnings: [],
+
+      /**
+       * Load the JSON schema
+       */
+      loadSchema: async () => {
+        try {
+          const schema = await loadSchema();
+          set({ schema, schemaLoaded: true, error: null });
+        } catch (error) {
+          const message = error instanceof Error ? error.message : 'Failed to load schema';
+          set({ error: message });
+        }
+      },
 
       /**
        * Load a config file from disk
@@ -87,217 +118,285 @@ export const useConfigStore = create<ConfigState>()(
         set({ isLoading: true, error: null });
 
         try {
-          // Read file content
-          const content = await readConfigFile(path);
+          // Read file via Tauri
+          const content = await invoke<string>('read_config_file', { path });
 
-          // Get file metadata for change detection
-          const metadata = await getFileMetadata(path);
+          // Parse config file
+          const schema = get().schema;
+          if (!schema) {
+            throw new Error('Schema not loaded. Call loadSchema() first.');
+          }
 
-          // Parse the file
-          const parsedFile = parseConfigFile(content, PROPERTY_MAP);
+          const propertyMap = createPropertyMap(schema);
+          const parsedFile = parseConfigFile(content, propertyMap);
 
-          // Update state
+          // Store parsed data
+          const config = new Map(parsedFile.parseResult.valid);
+          const originalConfig = new Map(parsedFile.parseResult.valid);
+
           set({
-            config: parsedFile.parseResult.valid,
+            config,
+            originalConfig,
             parsedFile,
             filePath: path,
-            loadedTimestamp: metadata.modified_time,
-            modifiedProperties: new Set(),
+            lastSavedTimestamp: Date.now(),
             warnings: parsedFile.parseResult.warnings,
+            error: null,
             isLoading: false,
           });
         } catch (error) {
-          set({
-            error: error instanceof Error ? error.message : 'Failed to load config file',
-            isLoading: false,
-          });
+          const message = error instanceof Error ? error.message : 'Failed to load config file';
+          set({ error: message, isLoading: false });
         }
       },
 
       /**
-       * Load the default config file for the current platform
+       * Load the default platform config
        */
       loadDefaultConfig: async () => {
         try {
-          const defaultPath = await getDefaultConfigPath();
+          const defaultPath = await invoke<string>('get_default_config_path');
+          const exists = await invoke<boolean>('file_exists', { path: defaultPath });
+
+          if (!exists) {
+            set({
+              error: `Default config file not found at: ${defaultPath}`,
+            });
+            return;
+          }
+
           await get().loadConfigFile(defaultPath);
         } catch (error) {
-          set({
-            error: error instanceof Error ? error.message : 'Failed to load default config',
-          });
+          const message = error instanceof Error ? error.message : 'Failed to load default config';
+          set({ error: message });
         }
       },
 
       /**
-       * Save the current config to disk
+       * Open file dialog and load selected config file
+       */
+      openConfigFile: async () => {
+        try {
+          const selected = await open({
+            multiple: false,
+            filters: [
+              {
+                name: 'Config Files',
+                extensions: ['properties', 'conf', 'config'],
+              },
+            ],
+          });
+
+          if (selected && typeof selected === 'string') {
+            await get().loadConfigFile(selected);
+          }
+        } catch (error) {
+          const message = error instanceof Error ? error.message : 'Failed to open file';
+          set({ error: message });
+        }
+      },
+
+      /**
+       * Save config to current file path
        */
       saveConfig: async () => {
-        const state = get();
-        const { filePath, parsedFile, config, modifiedProperties } = state;
+        const { filePath, config, originalConfig, parsedFile, schema } = get();
 
         if (!filePath) {
-          set({ error: 'No file path set' });
+          // No file path, use Save As
+          await get().saveConfigAs();
           return;
         }
 
-        if (!parsedFile) {
-          set({ error: 'No config loaded' });
+        if (!schema || !parsedFile) {
+          set({ error: 'Schema or parsed file not loaded' });
           return;
         }
 
         set({ isSaving: true, error: null });
 
         try {
-          // Check if file was modified externally
-          const currentMetadata = await getFileMetadata(filePath);
-          if (
-            state.loadedTimestamp &&
-            currentMetadata.exists &&
-            currentMetadata.modified_time > state.loadedTimestamp
-          ) {
-            // File was modified - warn user
-            // For now, we'll proceed with save. Phase 3 will add conflict resolution UI.
-            console.warn('File was modified externally');
-          }
-
           // Create backup
-          await createBackup(filePath);
+          await invoke('create_backup', { path: filePath });
 
-          // Build save options
-          const saveOptions = buildSaveOptions(
-            parsedFile,
-            config,
-            modifiedProperties,
-            PROPERTY_MAP
-          );
+          // Build save options with change tracking
+          const propertyMap = createPropertyMap(schema);
+          const modifiedKeys = new Set<string>();
 
-          // Generate new file content
+          // Find all modified and new keys
+          config.forEach((value, key) => {
+            const originalValue = originalConfig.get(key);
+            if (
+              originalValue === undefined ||
+              JSON.stringify(value) !== JSON.stringify(originalValue)
+            ) {
+              modifiedKeys.add(key);
+            }
+          });
+
+          const saveOptions = buildSaveOptions(parsedFile, config, modifiedKeys, propertyMap);
+
+          // Generate new config content
           const newContent = saveConfigFile(parsedFile, saveOptions);
 
-          // Write to disk
-          await writeConfigFile(filePath, newContent);
+          // Write to file
+          await invoke('write_config_file', {
+            path: filePath,
+            content: newContent,
+          });
 
-          // Update metadata
-          const newMetadata = await getFileMetadata(filePath);
-
-          // Re-parse the saved file to update our state
-          const newParsedFile = parseConfigFile(newContent, PROPERTY_MAP);
-
+          // Update state
+          const newOriginalConfig = new Map(config);
           set({
-            parsedFile: newParsedFile,
-            loadedTimestamp: newMetadata.modified_time,
-            modifiedProperties: new Set(),
+            originalConfig: newOriginalConfig,
+            lastSavedTimestamp: Date.now(),
             isSaving: false,
+            error: null,
           });
         } catch (error) {
-          set({
-            error: error instanceof Error ? error.message : 'Failed to save config',
-            isSaving: false,
-          });
+          const message = error instanceof Error ? error.message : 'Failed to save config';
+          set({ error: message, isSaving: false });
         }
       },
 
       /**
-       * Update a property value
+       * Save config to a new file path
+       */
+      saveConfigAs: async () => {
+        try {
+          const selected = await save({
+            filters: [
+              {
+                name: 'Config Files',
+                extensions: ['properties', 'conf', 'config'],
+              },
+            ],
+          });
+
+          if (selected) {
+            set({ filePath: selected });
+            await get().saveConfig();
+          }
+        } catch (error) {
+          const message = error instanceof Error ? error.message : 'Failed to save file';
+          set({ error: message });
+        }
+      },
+
+      /**
+       * Update a single property value
        */
       updateProperty: (key: string, value: string | string[]) => {
-        set(state => {
-          const newConfig = new Map(state.config);
-          newConfig.set(key, value);
-          const newModified = new Set(state.modifiedProperties);
-          newModified.add(key);
-
-          return {
-            config: newConfig,
-            modifiedProperties: newModified,
-          };
-        });
+        const { config } = get();
+        const newConfig = new Map(config);
+        newConfig.set(key, value);
+        set({ config: newConfig });
       },
 
       /**
-       * Remove a property (will be deleted from file on save)
+       * Remove a property from config
        */
       removeProperty: (key: string) => {
-        set(state => {
-          const newConfig = new Map(state.config);
-          newConfig.delete(key);
-          const newModified = new Set(state.modifiedProperties);
-          newModified.add(key); // Mark as modified so it gets removed on save
-
-          return {
-            config: newConfig,
-            modifiedProperties: newModified,
-          };
-        });
+        const { config } = get();
+        const newConfig = new Map(config);
+        newConfig.delete(key);
+        set({ config: newConfig });
       },
 
       /**
-       * Set active category
+       * Reset a property to its default value from schema
        */
-      setActiveCategory: (category: string | null) => {
-        set({ activeCategory: category });
+      resetProperty: (key: string) => {
+        const { schema, config } = get();
+        if (!schema) return;
+
+        const propertyMap = createPropertyMap(schema);
+        const property = propertyMap.get(key);
+
+        if (property) {
+          const defaultValue = getDefaultValue(property);
+          const newConfig = new Map(config);
+
+          if (defaultValue === null) {
+            newConfig.delete(key);
+          } else {
+            newConfig.set(key, defaultValue);
+          }
+
+          set({ config: newConfig });
+        }
+      },
+
+      /**
+       * Set active tab
+       */
+      setActiveTab: (tabId: string) => {
+        set({ activeTab: tabId });
       },
 
       /**
        * Set active section
        */
-      setActiveSection: (section: string | null) => {
-        set({ activeSection: section });
+      setActiveSection: (sectionId: string) => {
+        set({ activeSection: sectionId });
       },
 
       /**
-       * Reset a property to its default value
+       * Get summary of changes
        */
-      resetProperty: (key: string) => {
-        const property = PROPERTY_MAP.get(key);
-        if (property && property.defaultValue) {
-          get().updateProperty(key, property.defaultValue);
-        } else {
-          get().removeProperty(key);
-        }
-      },
+      getChangeSummary: (): ChangeSummary => {
+        const { config, originalConfig } = get();
 
-      /**
-       * Reset all properties
-       */
-      resetAll: () => {
-        set({
-          config: new Map(),
-          modifiedProperties: new Set(),
+        const modified: string[] = [];
+        const added: string[] = [];
+        const removed: string[] = [];
+
+        // Check for modified and added properties
+        config.forEach((value, key) => {
+          const originalValue = originalConfig.get(key);
+
+          if (originalValue === undefined) {
+            added.push(key);
+          } else if (JSON.stringify(value) !== JSON.stringify(originalValue)) {
+            modified.push(key);
+          }
         });
+
+        // Check for removed properties
+        originalConfig.forEach((_, key) => {
+          if (!config.has(key)) {
+            removed.push(key);
+          }
+        });
+
+        return { modified, added, removed };
       },
 
       /**
-       * Get change summary
+       * Check if there are unsaved changes
        */
-      getChangeSummary: () => {
-        const state = get();
-        const { parsedFile, config, modifiedProperties } = state;
-
-        if (!parsedFile) {
-          return { modified: [], added: [], removed: [], total: 0 };
-        }
-
-        const saveOptions = buildSaveOptions(parsedFile, config, modifiedProperties, PROPERTY_MAP);
-
-        return getChangeSummary(saveOptions);
+      hasUnsavedChanges: (): boolean => {
+        const summary = get().getChangeSummary();
+        return (
+          summary.modified.length > 0 || summary.added.length > 0 || summary.removed.length > 0
+        );
       },
 
       /**
-       * Clear error message
+       * Discard all changes and revert to original config
        */
-      clearError: () => {
-        set({ error: null });
+      discardChanges: () => {
+        const { originalConfig } = get();
+        set({ config: new Map(originalConfig) });
       },
     }),
     {
-      name: 'ghostty-config-storage',
+      name: 'ghostty-config-store',
       partialize: state => ({
-        filePath: state.filePath,
-        activeCategory: state.activeCategory,
+        lastFilePath: state.filePath,
+        activeTab: state.activeTab,
         activeSection: state.activeSection,
       }),
-      // Skip serializing Maps and Sets - they'll be reconstructed on load
     }
   )
 );
