@@ -79,7 +79,7 @@ fn get_default_config_path() -> Result<String, String> {
     {
         let home = std::env::var("HOME")
             .map_err(|_| "Could not determine home directory".to_string())?;
-        Ok(format!("{}/.config/ghostty/config", home))
+        Ok(format!("{}/Library/Application Support/com.mitchellh.ghostty/config", home))
     }
 
     #[cfg(target_os = "linux")]

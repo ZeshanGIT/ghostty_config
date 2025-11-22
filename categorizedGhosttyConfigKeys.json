@@ -1,0 +1,971 @@
+{
+  "tabs": [
+    {
+      "id": "appearance",
+      "label": "Appearance",
+      "icon": "Palette",
+      "sections": [
+        {
+          "id": "font",
+          "label": "Font",
+          "keys": [
+            {
+              "key": "font-family",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-family-bold",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-family-italic",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-family-bold-italic",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-style",
+              "valueType": "font-style"
+            },
+            {
+              "key": "font-style-bold",
+              "valueType": "font-style"
+            },
+            {
+              "key": "font-style-italic",
+              "valueType": "font-style"
+            },
+            {
+              "key": "font-style-bold-italic",
+              "valueType": "font-style"
+            },
+            {
+              "key": "font-synthetic-style",
+              "valueType": "enum"
+            },
+            {
+              "key": "font-feature",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-size",
+              "valueType": "number"
+            },
+            {
+              "key": "font-variation",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-variation-bold",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-variation-italic",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-variation-bold-italic",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-codepoint-map",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "font-thicken",
+              "valueType": "boolean"
+            },
+            {
+              "key": "font-thicken-strength",
+              "valueType": "number"
+            },
+            {
+              "key": "font-shaping-break",
+              "valueType": "enum"
+            },
+            {
+              "key": "freetype-load-flags",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-title-font-family",
+              "valueType": "font-family"
+            }
+          ]
+        },
+        {
+          "id": "colors",
+          "label": "Colors",
+          "keys": [
+            {
+              "key": "background",
+              "valueType": "color"
+            },
+            {
+              "key": "foreground",
+              "valueType": "color"
+            },
+            {
+              "key": "selection-foreground",
+              "valueType": "color"
+            },
+            {
+              "key": "selection-background",
+              "valueType": "color"
+            },
+            {
+              "key": "palette",
+              "valueType": "color"
+            },
+            {
+              "key": "cursor-color",
+              "valueType": "color"
+            },
+            {
+              "key": "cursor-text",
+              "valueType": "color"
+            },
+            {
+              "key": "unfocused-split-fill",
+              "valueType": "color"
+            },
+            {
+              "key": "split-divider-color",
+              "valueType": "color"
+            },
+            {
+              "key": "window-titlebar-background",
+              "valueType": "color"
+            },
+            {
+              "key": "window-titlebar-foreground",
+              "valueType": "color"
+            },
+            {
+              "key": "bold-color",
+              "valueType": "color"
+            }
+          ]
+        },
+        {
+          "id": "theme",
+          "label": "Theme",
+          "keys": [
+            {
+              "key": "alpha-blending",
+              "valueType": "enum"
+            },
+            {
+              "key": "theme",
+              "valueType": "text"
+            },
+            {
+              "key": "minimum-contrast",
+              "valueType": "number"
+            }
+          ]
+        },
+        {
+          "id": "background",
+          "label": "Background",
+          "keys": [
+            {
+              "key": "background-image",
+              "valueType": "filepath"
+            },
+            {
+              "key": "background-image-opacity",
+              "valueType": "opacity"
+            },
+            {
+              "key": "background-image-position",
+              "valueType": "enum"
+            },
+            {
+              "key": "background-image-fit",
+              "valueType": "enum"
+            },
+            {
+              "key": "background-image-repeat",
+              "valueType": "boolean"
+            },
+            {
+              "key": "background-opacity",
+              "valueType": "opacity"
+            },
+            {
+              "key": "background-opacity-cells",
+              "valueType": "boolean"
+            },
+            {
+              "key": "background-blur",
+              "valueType": "special-number"
+            }
+          ]
+        },
+        {
+          "id": "cursor",
+          "label": "Cursor",
+          "keys": [
+            {
+              "key": "cursor-opacity",
+              "valueType": "opacity"
+            },
+            {
+              "key": "cursor-style",
+              "valueType": "enum"
+            },
+            {
+              "key": "cursor-style-blink",
+              "valueType": "enum"
+            },
+            {
+              "key": "cursor-click-to-move",
+              "valueType": "boolean"
+            }
+          ]
+        },
+        {
+          "id": "opacity",
+          "label": "Opacity",
+          "keys": [
+            {
+              "key": "unfocused-split-opacity",
+              "valueType": "opacity"
+            },
+            {
+              "key": "faint-opacity",
+              "valueType": "opacity"
+            }
+          ]
+        },
+        {
+          "id": "adjustments",
+          "label": "Adjustments",
+          "keys": [
+            {
+              "key": "adjust-cell-width",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-cell-height",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-font-baseline",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-underline-position",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-underline-thickness",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-strikethrough-position",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-strikethrough-thickness",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-overline-position",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-overline-thickness",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-cursor-thickness",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-cursor-height",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-box-thickness",
+              "valueType": "adjustment"
+            },
+            {
+              "key": "adjust-icon-height",
+              "valueType": "adjustment"
+            }
+          ]
+        },
+        {
+          "id": "shaders",
+          "label": "Shaders",
+          "keys": [
+            {
+              "key": "custom-shader",
+              "valueType": "text"
+            },
+            {
+              "key": "custom-shader-animation",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "window",
+      "label": "Window",
+      "icon": "LayoutGrid",
+      "sections": [
+        {
+          "id": "behavior",
+          "label": "Behavior",
+          "keys": [
+            {
+              "key": "maximize",
+              "valueType": "boolean"
+            },
+            {
+              "key": "fullscreen",
+              "valueType": "boolean"
+            },
+            {
+              "key": "window-vsync",
+              "valueType": "boolean"
+            },
+            {
+              "key": "window-inherit-working-directory",
+              "valueType": "boolean"
+            },
+            {
+              "key": "window-inherit-font-size",
+              "valueType": "boolean"
+            },
+            {
+              "key": "window-save-state",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-step-resize",
+              "valueType": "boolean"
+            },
+            {
+              "key": "confirm-close-surface",
+              "valueType": "enum"
+            },
+            {
+              "key": "initial-window",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "appearance",
+          "label": "Appearance",
+          "keys": [
+            {
+              "key": "title",
+              "valueType": "text"
+            },
+            {
+              "key": "window-decoration",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-subtitle",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-theme",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-colorspace",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-new-tab-position",
+              "valueType": "enum"
+            },
+            {
+              "key": "window-show-tab-bar",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "padding",
+          "label": "Padding",
+          "keys": [
+            {
+              "key": "window-padding-x",
+              "valueType": "padding"
+            },
+            {
+              "key": "window-padding-y",
+              "valueType": "padding"
+            },
+            {
+              "key": "window-padding-balance",
+              "valueType": "boolean"
+            },
+            {
+              "key": "window-padding-color",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "size-position",
+          "label": "Size & Position",
+          "keys": [
+            {
+              "key": "window-height",
+              "valueType": "number"
+            },
+            {
+              "key": "window-width",
+              "valueType": "number"
+            },
+            {
+              "key": "window-position-x",
+              "valueType": "number"
+            },
+            {
+              "key": "window-position-y",
+              "valueType": "number"
+            }
+          ]
+        },
+        {
+          "id": "gtk",
+          "label": "GTK (Linux)",
+          "keys": [
+            {
+              "key": "gtk-opengl-debug",
+              "valueType": "boolean"
+            },
+            {
+              "key": "gtk-single-instance",
+              "valueType": "boolean"
+            },
+            {
+              "key": "gtk-titlebar",
+              "valueType": "enum"
+            },
+            {
+              "key": "gtk-tabs-location",
+              "valueType": "enum"
+            },
+            {
+              "key": "gtk-titlebar-hide-when-maximized",
+              "valueType": "boolean"
+            },
+            {
+              "key": "gtk-toolbar-style",
+              "valueType": "enum"
+            },
+            {
+              "key": "gtk-titlebar-style",
+              "valueType": "enum"
+            },
+            {
+              "key": "gtk-wide-tabs",
+              "valueType": "boolean"
+            },
+            {
+              "key": "gtk-custom-css",
+              "valueType": "text"
+            }
+          ]
+        },
+        {
+          "id": "macos",
+          "label": "macOS",
+          "keys": [
+            {
+              "key": "macos-non-native-fullscreen",
+              "valueType": "boolean"
+            },
+            {
+              "key": "macos-window-buttons",
+              "valueType": "enum"
+            },
+            {
+              "key": "macos-titlebar-style",
+              "valueType": "enum"
+            },
+            {
+              "key": "macos-titlebar-proxy-icon",
+              "valueType": "enum"
+            },
+            {
+              "key": "macos-window-shadow",
+              "valueType": "boolean"
+            },
+            {
+              "key": "macos-icon",
+              "valueType": "enum"
+            },
+            {
+              "key": "macos-custom-icon",
+              "valueType": "filepath"
+            },
+            {
+              "key": "macos-icon-frame",
+              "valueType": "color"
+            },
+            {
+              "key": "macos-icon-ghost-color",
+              "valueType": "color"
+            },
+            {
+              "key": "macos-icon-screen-color",
+              "valueType": "color"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input",
+      "label": "Input",
+      "icon": "Keyboard",
+      "sections": [
+        {
+          "id": "keyboard",
+          "label": "Keyboard",
+          "keys": [
+            {
+              "key": "keybind",
+              "valueType": "keybinding"
+            }
+          ]
+        },
+        {
+          "id": "mouse",
+          "label": "Mouse",
+          "keys": [
+            {
+              "key": "mouse-hide-while-typing",
+              "valueType": "boolean"
+            },
+            {
+              "key": "mouse-shift-capture",
+              "valueType": "enum"
+            },
+            {
+              "key": "mouse-scroll-multiplier",
+              "valueType": "special-number"
+            },
+            {
+              "key": "focus-follows-mouse",
+              "valueType": "boolean"
+            },
+            {
+              "key": "right-click-action",
+              "valueType": "enum"
+            },
+            {
+              "key": "click-repeat-interval",
+              "valueType": "number"
+            }
+          ]
+        },
+        {
+          "id": "clipboard",
+          "label": "Clipboard",
+          "keys": [
+            {
+              "key": "clipboard-read",
+              "valueType": "enum"
+            },
+            {
+              "key": "clipboard-write",
+              "valueType": "enum"
+            },
+            {
+              "key": "clipboard-trim-trailing-spaces",
+              "valueType": "boolean"
+            },
+            {
+              "key": "clipboard-paste-protection",
+              "valueType": "boolean"
+            },
+            {
+              "key": "clipboard-paste-bracketed-safe",
+              "valueType": "boolean"
+            },
+            {
+              "key": "copy-on-select",
+              "valueType": "boolean"
+            }
+          ]
+        },
+        {
+          "id": "selection",
+          "label": "Selection",
+          "keys": [
+            {
+              "key": "selection-clear-on-typing",
+              "valueType": "boolean"
+            },
+            {
+              "key": "selection-clear-on-copy",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terminal",
+      "label": "Terminal",
+      "icon": "Terminal",
+      "sections": [
+        {
+          "id": "behavior",
+          "label": "Behavior",
+          "keys": [
+            {
+              "key": "grapheme-width-method",
+              "valueType": "enum"
+            },
+            {
+              "key": "scroll-to-bottom",
+              "valueType": "enum"
+            },
+            {
+              "key": "wait-after-command",
+              "valueType": "boolean"
+            },
+            {
+              "key": "abnormal-command-exit-runtime",
+              "valueType": "number"
+            },
+            {
+              "key": "scrollback-limit",
+              "valueType": "number"
+            },
+            {
+              "key": "link-url",
+              "valueType": "boolean"
+            },
+            {
+              "key": "link-previews",
+              "valueType": "enum"
+            },
+            {
+              "key": "image-storage-limit",
+              "valueType": "number"
+            },
+            {
+              "key": "term",
+              "valueType": "text"
+            }
+          ]
+        },
+        {
+          "id": "command",
+          "label": "Command",
+          "keys": [
+            {
+              "key": "command",
+              "valueType": "command"
+            },
+            {
+              "key": "initial-command",
+              "valueType": "command"
+            },
+            {
+              "key": "env",
+              "valueType": "repeatable-text"
+            },
+            {
+              "key": "input",
+              "valueType": "command"
+            },
+            {
+              "key": "working-directory",
+              "valueType": "text"
+            }
+          ]
+        },
+        {
+          "id": "shell-integration",
+          "label": "Shell Integration",
+          "keys": [
+            {
+              "key": "shell-integration",
+              "valueType": "enum"
+            },
+            {
+              "key": "shell-integration-features",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "protocols",
+          "label": "Protocols (VT/OSC)",
+          "keys": [
+            {
+              "key": "title-report",
+              "valueType": "enum"
+            },
+            {
+              "key": "osc-color-report-format",
+              "valueType": "enum"
+            },
+            {
+              "key": "vt-kam-allowed",
+              "valueType": "boolean"
+            },
+            {
+              "key": "enquiry-response",
+              "valueType": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ui",
+      "label": "UI",
+      "icon": "PanelTop",
+      "sections": [
+        {
+          "id": "quick-terminal",
+          "label": "Quick Terminal",
+          "keys": [
+            {
+              "key": "quick-terminal-position",
+              "valueType": "enum"
+            },
+            {
+              "key": "gtk-quick-terminal-layer",
+              "valueType": "enum"
+            },
+            {
+              "key": "gtk-quick-terminal-namespace",
+              "valueType": "text"
+            },
+            {
+              "key": "quick-terminal-screen",
+              "valueType": "enum"
+            },
+            {
+              "key": "quick-terminal-animation-duration",
+              "valueType": "number"
+            },
+            {
+              "key": "quick-terminal-autohide",
+              "valueType": "boolean"
+            },
+            {
+              "key": "quick-terminal-space-behavior",
+              "valueType": "enum"
+            },
+            {
+              "key": "quick-terminal-keyboard-interactivity",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "command-palette",
+          "label": "Command Palette",
+          "keys": [
+            {
+              "key": "command-palette-entry",
+              "valueType": "repeatable-text"
+            }
+          ]
+        },
+        {
+          "id": "overlays",
+          "label": "Overlays",
+          "keys": [
+            {
+              "key": "resize-overlay",
+              "valueType": "boolean"
+            },
+            {
+              "key": "resize-overlay-position",
+              "valueType": "enum"
+            },
+            {
+              "key": "resize-overlay-duration",
+              "valueType": "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notifications",
+      "label": "Notifications",
+      "icon": "Bell",
+      "sections": [
+        {
+          "id": "bell",
+          "label": "Bell",
+          "keys": [
+            {
+              "key": "bell-features",
+              "valueType": "enum"
+            },
+            {
+              "key": "bell-audio-path",
+              "valueType": "text"
+            },
+            {
+              "key": "bell-audio-volume",
+              "valueType": "number"
+            }
+          ]
+        },
+        {
+          "id": "desktop",
+          "label": "Desktop Notifications",
+          "keys": [
+            {
+              "key": "app-notifications",
+              "valueType": "enum"
+            },
+            {
+              "key": "desktop-notifications",
+              "valueType": "enum"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "system",
+      "label": "System",
+      "icon": "Settings",
+      "sections": [
+        {
+          "id": "application",
+          "label": "Application",
+          "keys": [
+            {
+              "key": "class",
+              "valueType": "text"
+            },
+            {
+              "key": "x11-instance-name",
+              "valueType": "text"
+            },
+            {
+              "key": "quit-after-last-window-closed",
+              "valueType": "enum"
+            },
+            {
+              "key": "quit-after-last-window-closed-delay",
+              "valueType": "number"
+            },
+            {
+              "key": "undo-timeout",
+              "valueType": "number"
+            }
+          ]
+        },
+        {
+          "id": "config",
+          "label": "Configuration",
+          "keys": [
+            {
+              "key": "config-file",
+              "valueType": "filepath"
+            },
+            {
+              "key": "config-default-files",
+              "valueType": "repeatable-text"
+            }
+          ]
+        },
+        {
+          "id": "updates",
+          "label": "Auto Update",
+          "keys": [
+            {
+              "key": "auto-update",
+              "valueType": "enum"
+            },
+            {
+              "key": "auto-update-channel",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "performance",
+          "label": "Performance",
+          "keys": [
+            {
+              "key": "async-backend",
+              "valueType": "enum"
+            }
+          ]
+        },
+        {
+          "id": "linux",
+          "label": "Linux",
+          "keys": [
+            {
+              "key": "linux-cgroup",
+              "valueType": "text"
+            },
+            {
+              "key": "linux-cgroup-memory-limit",
+              "valueType": "number"
+            },
+            {
+              "key": "linux-cgroup-processes-limit",
+              "valueType": "number"
+            },
+            {
+              "key": "linux-cgroup-hard-fail",
+              "valueType": "boolean"
+            }
+          ]
+        },
+        {
+          "id": "macos",
+          "label": "macOS",
+          "keys": [
+            {
+              "key": "macos-dock-drop-behavior",
+              "valueType": "enum"
+            },
+            {
+              "key": "macos-option-as-alt",
+              "valueType": "enum"
+            },
+            {
+              "key": "macos-hidden",
+              "valueType": "boolean"
+            },
+            {
+              "key": "macos-auto-secure-input",
+              "valueType": "boolean"
+            },
+            {
+              "key": "macos-secure-input-indication",
+              "valueType": "boolean"
+            },
+            {
+              "key": "macos-shortcuts",
+              "valueType": "enum"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
