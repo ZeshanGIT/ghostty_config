@@ -78,8 +78,14 @@ export const ColorPicker = ({
   );
   const [alpha, setAlpha] = useState(selectedColor.alpha() * 100 || defaultColor.alpha() * 100);
   const [mode, setMode] = useState('hex');
+  const [isMounted, setIsMounted] = useState(false);
 
-  console.log('[ColorPicker] State:', { hue, saturation, lightness, alpha });
+  console.log('[ColorPicker] State:', { hue, saturation, lightness, alpha, isMounted });
+
+  // Track mount state
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Update color when controlled value changes
   useEffect(() => {
@@ -95,9 +101,14 @@ export const ColorPicker = ({
     }
   }, [value]);
 
-  // Notify parent of changes
+  // Notify parent of changes (but not on initial mount)
   useEffect(() => {
-    console.log('[ColorPicker] Change notification effect triggered');
+    console.log('[ColorPicker] Change notification effect triggered, isMounted:', isMounted);
+    if (!isMounted) {
+      console.log('[ColorPicker] Skipping onChange - not mounted yet');
+      return;
+    }
+
     if (onChange) {
       const color = Color.hsl(hue, saturation, lightness).alpha(alpha / 100);
       const rgba = color.rgb().array();
@@ -105,7 +116,7 @@ export const ColorPicker = ({
 
       onChange([rgba[0], rgba[1], rgba[2], alpha / 100]);
     }
-  }, [hue, saturation, lightness, alpha, onChange]);
+  }, [hue, saturation, lightness, alpha, onChange, isMounted]);
 
   return (
     <ColorPickerContext.Provider
