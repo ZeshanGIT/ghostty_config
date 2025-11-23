@@ -20,6 +20,7 @@ function App() {
     schemaLoaded,
     loadSchema,
     openConfigFile,
+    loadDefaultConfig,
     saveConfig,
     filePath,
     isLoading,
@@ -175,10 +176,15 @@ function App() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 items-center">
-                  <Button onClick={openConfigFile} size="lg">
-                    <FolderOpen className="h-5 w-5 mr-2" />
-                    Open Config File
-                  </Button>
+                  <div className="flex gap-3">
+                    <Button onClick={openConfigFile} size="lg">
+                      <FolderOpen className="h-5 w-5 mr-2" />
+                      Open Config File
+                    </Button>
+                    <Button onClick={loadDefaultConfig} size="lg" variant="outline">
+                      Load Default Config
+                    </Button>
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     Keyboard shortcut:{' '}
                     <kbd className="px-2 py-1 bg-muted rounded text-xs">

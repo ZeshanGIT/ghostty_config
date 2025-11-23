@@ -115,11 +115,14 @@ export const useConfigStore = create<ConfigStoreState>()(
        * Load a config file from disk
        */
       loadConfigFile: async (path: string) => {
+        console.log('[loadConfigFile] Starting to load:', path);
         set({ isLoading: true, error: null });
 
         try {
+          console.log('[loadConfigFile] Invoking read_config_file command...');
           // Read file via Tauri
           const content = await invoke<string>('read_config_file', { path });
+          console.log('[loadConfigFile] File content length:', content.length);
 
           // Parse config file
           const schema = get().schema;
@@ -127,8 +130,13 @@ export const useConfigStore = create<ConfigStoreState>()(
             throw new Error('Schema not loaded. Call loadSchema() first.');
           }
 
+          console.log('[loadConfigFile] Parsing config file...');
           const propertyMap = createPropertyMap(schema);
           const parsedFile = parseConfigFile(content, propertyMap);
+          console.log(
+            '[loadConfigFile] Parsed successfully. Valid properties:',
+            parsedFile.parseResult.valid.size
+          );
 
           // Store parsed data
           const config = new Map(parsedFile.parseResult.valid);
@@ -144,7 +152,9 @@ export const useConfigStore = create<ConfigStoreState>()(
             error: null,
             isLoading: false,
           });
+          console.log('[loadConfigFile] Config loaded successfully');
         } catch (error) {
+          console.error('[loadConfigFile] Error:', error);
           const message = error instanceof Error ? error.message : 'Failed to load config file';
           set({ error: message, isLoading: false });
         }
@@ -155,8 +165,13 @@ export const useConfigStore = create<ConfigStoreState>()(
        */
       loadDefaultConfig: async () => {
         try {
+          console.log('[loadDefaultConfig] Getting default config path...');
           const defaultPath = await invoke<string>('get_default_config_path');
+          console.log('[loadDefaultConfig] Default path:', defaultPath);
+
+          console.log('[loadDefaultConfig] Checking if file exists...');
           const exists = await invoke<boolean>('file_exists', { path: defaultPath });
+          console.log('[loadDefaultConfig] File exists:', exists);
 
           if (!exists) {
             set({
@@ -165,8 +180,10 @@ export const useConfigStore = create<ConfigStoreState>()(
             return;
           }
 
+          console.log('[loadDefaultConfig] Loading default config...');
           await get().loadConfigFile(defaultPath);
         } catch (error) {
+          console.error('[loadDefaultConfig] Error:', error);
           const message = error instanceof Error ? error.message : 'Failed to load default config';
           set({ error: message });
         }
@@ -177,6 +194,8 @@ export const useConfigStore = create<ConfigStoreState>()(
        */
       openConfigFile: async () => {
         try {
+          console.log('[openConfigFile] Starting file dialog...');
+
           const selected = await open({
             multiple: false,
             filters: [
@@ -187,10 +206,16 @@ export const useConfigStore = create<ConfigStoreState>()(
             ],
           });
 
+          console.log('[openConfigFile] Dialog result:', selected);
+
           if (selected && typeof selected === 'string') {
+            console.log('[openConfigFile] Loading file:', selected);
             await get().loadConfigFile(selected);
+          } else {
+            console.log('[openConfigFile] No file selected or invalid selection');
           }
         } catch (error) {
+          console.error('[openConfigFile] Error:', error);
           const message = error instanceof Error ? error.message : 'Failed to open file';
           set({ error: message });
         }
