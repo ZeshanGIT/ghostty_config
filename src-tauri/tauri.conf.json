@@ -23,6 +23,12 @@
       "csp": null
     }
   },
+  "permissions": [
+    "core:default",
+    "dialog:allow-open",
+    "dialog:allow-save",
+    "dialog:default"
+  ],
   "bundle": {
     "active": true,
     "targets": "all",
