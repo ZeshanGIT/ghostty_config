@@ -1,6 +1,16 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  ColorPicker,
+  ColorPickerSelection,
+  ColorPickerHue,
+  ColorPickerAlpha,
+  ColorPickerFormat,
+  ColorPickerOutput,
+  ColorPickerEyeDropper,
+} from '@/components/ui/shadcn-io/color-picker';
+import Color from 'color';
 import { useState } from 'react';
 
 interface ColorEditorProps {
@@ -28,20 +38,25 @@ export function ColorEditor({
     if (!color || typeof color !== 'string') return '#000000';
     // If it's a hex color, return it
     if (color.startsWith('#')) return color;
-    // If it's a named color, we'll just show it as-is
-    return color;
+    // If it's a named color, try to convert to hex
+    try {
+      return Color(color).hex();
+    } catch {
+      // If conversion fails, return default
+      return '#000000';
+    }
   };
 
   const displayColor = normalizeColor(value);
-  const isHexColor = displayColor.startsWith('#');
 
   const handleInputChange = (newValue: string) => {
     setLocalValue(newValue);
     onChange(newValue);
   };
 
-  const handleColorPickerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const hexColor = e.target.value;
+  const handleColorPickerChange = (rgba: [number, number, number, number]) => {
+    const color = Color.rgb(rgba[0], rgba[1], rgba[2]).alpha(rgba[3]);
+    const hexColor = color.hex();
     setLocalValue(hexColor);
     onChange(hexColor);
   };
@@ -62,18 +77,24 @@ export function ColorEditor({
               aria-label="Pick color"
             />
           </PopoverTrigger>
-          <PopoverContent className="w-64 p-3">
-            <div className="space-y-2">
-              <Label htmlFor={`${label}-picker`}>Color Picker</Label>
-              <input
-                id={`${label}-picker`}
-                type="color"
-                value={isHexColor ? displayColor : '#000000'}
-                onChange={handleColorPickerChange}
-                className="w-full h-32 cursor-pointer"
-                disabled={disabled}
-              />
-            </div>
+          <PopoverContent className="w-80 p-4">
+            <ColorPicker
+              value={displayColor}
+              onChange={handleColorPickerChange as (value: Parameters<typeof Color.rgb>[0]) => void}
+            >
+              <div className="space-y-4">
+                <ColorPickerSelection className="h-40" />
+                <div className="space-y-2">
+                  <ColorPickerHue />
+                  <ColorPickerAlpha />
+                </div>
+                <div className="flex items-center gap-2">
+                  <ColorPickerFormat className="flex-1" />
+                  <ColorPickerOutput />
+                  <ColorPickerEyeDropper />
+                </div>
+              </div>
+            </ColorPicker>
           </PopoverContent>
         </Popover>
         <div className="flex-1">
