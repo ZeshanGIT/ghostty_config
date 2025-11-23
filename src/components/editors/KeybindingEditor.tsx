@@ -47,7 +47,8 @@ export function KeybindingEditor({
     if (recordedKeys.length > 0) {
       const keyCombo = recordedKeys.join('+');
       // Parse the existing value to get the action part
-      const parts = value.split('>');
+      const safeValue = value || '';
+      const parts = safeValue.split('>');
       const action = parts.length > 1 ? parts[1] : '';
       onChange(action ? `${keyCombo}>${action}` : keyCombo);
     }
@@ -65,7 +66,7 @@ export function KeybindingEditor({
           <Input
             id={label}
             type="text"
-            value={value}
+            value={value || ''}
             onChange={e => onChange(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={disabled}

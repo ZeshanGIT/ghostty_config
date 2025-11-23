@@ -19,8 +19,9 @@ export function AdjustmentEditor({
   error,
   placeholder = '10 or 10%',
 }: AdjustmentEditorProps) {
-  const isPercentage = value.endsWith('%');
-  const numericValue = isPercentage ? value.slice(0, -1) : value;
+  const safeValue = value || '';
+  const isPercentage = typeof safeValue === 'string' && safeValue.endsWith('%');
+  const numericValue = isPercentage ? safeValue.slice(0, -1) : safeValue;
 
   const togglePercentage = () => {
     if (isPercentage) {

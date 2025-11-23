@@ -20,11 +20,12 @@ export function ColorEditor({
   error,
   placeholder = '#000000',
 }: ColorEditorProps) {
-  const [localValue, setLocalValue] = useState(value);
+  const [localValue, setLocalValue] = useState(value || '');
 
   // Normalize color value for display
-  const normalizeColor = (color: string): string => {
-    if (!color) return '#000000';
+  const normalizeColor = (color: string | undefined | null): string => {
+    // Handle undefined, null, or empty string
+    if (!color || typeof color !== 'string') return '#000000';
     // If it's a hex color, return it
     if (color.startsWith('#')) return color;
     // If it's a named color, we'll just show it as-is

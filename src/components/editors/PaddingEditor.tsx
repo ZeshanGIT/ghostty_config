@@ -17,7 +17,8 @@ export function PaddingEditor({
   error,
 }: PaddingEditorProps) {
   // Parse padding value - can be "x" or "x,y"
-  const parts = value.split(',').map(p => p.trim());
+  const safeValue = value || '0';
+  const parts = safeValue.split(',').map(p => p.trim());
   const [horizontal, vertical] = parts.length === 2 ? parts : [parts[0] || '0', parts[0] || '0'];
 
   const handleHorizontalChange = (e: React.ChangeEvent<HTMLInputElement>) => {

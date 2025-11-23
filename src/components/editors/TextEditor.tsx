@@ -27,7 +27,7 @@ export function TextEditor({
       <Input
         id={label}
         type="text"
-        value={value}
+        value={value || ''}
         onChange={e => onChange(e.target.value)}
         disabled={disabled}
         placeholder={placeholder}
