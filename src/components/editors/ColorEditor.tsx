@@ -30,6 +30,8 @@ export function ColorEditor({
   error,
   placeholder = '#000000',
 }: ColorEditorProps) {
+  console.log('[ColorEditor] Render:', { label, value });
+
   const [localValue, setLocalValue] = useState(value || '');
   const [pickerColor, setPickerColor] = useState('#000000');
 
@@ -49,16 +51,20 @@ export function ColorEditor({
   };
 
   const displayColor = normalizeColor(value);
+  console.log('[ColorEditor] Display color:', displayColor);
 
   const handleInputChange = (newValue: string) => {
+    console.log('[ColorEditor] Input change:', newValue);
     setLocalValue(newValue);
     onChange(newValue);
   };
 
   const handleColorPickerChange = useCallback(
     (rgba: [number, number, number, number]) => {
+      console.log('[ColorEditor] Color picker change:', rgba);
       const color = Color.rgb(rgba[0], rgba[1], rgba[2]).alpha(rgba[3]);
       const hexColor = color.hex();
+      console.log('[ColorEditor] Converted to hex:', hexColor);
       setPickerColor(hexColor);
       setLocalValue(hexColor);
       onChange(hexColor);
@@ -67,6 +73,7 @@ export function ColorEditor({
   );
 
   const handlePopoverOpen = () => {
+    console.log('[ColorEditor] Popover opened, setting picker color to:', displayColor);
     setPickerColor(displayColor);
   };
 

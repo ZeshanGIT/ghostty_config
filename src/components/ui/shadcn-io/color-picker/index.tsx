@@ -64,6 +64,8 @@ export const ColorPicker = ({
   className,
   ...props
 }: ColorPickerProps) => {
+  console.log('[ColorPicker] Render with value:', value);
+
   const selectedColor = Color(value);
   const defaultColor = Color(defaultValue);
 
@@ -77,10 +79,14 @@ export const ColorPicker = ({
   const [alpha, setAlpha] = useState(selectedColor.alpha() * 100 || defaultColor.alpha() * 100);
   const [mode, setMode] = useState('hex');
 
+  console.log('[ColorPicker] State:', { hue, saturation, lightness, alpha });
+
   // Update color when controlled value changes
   useEffect(() => {
+    console.log('[ColorPicker] Value changed effect:', value);
     if (value) {
       const color = Color.rgb(value).rgb().object();
+      console.log('[ColorPicker] Setting internal state from value:', color);
 
       setHue(color.r);
       setSaturation(color.g);
@@ -91,9 +97,11 @@ export const ColorPicker = ({
 
   // Notify parent of changes
   useEffect(() => {
+    console.log('[ColorPicker] Change notification effect triggered');
     if (onChange) {
       const color = Color.hsl(hue, saturation, lightness).alpha(alpha / 100);
       const rgba = color.rgb().array();
+      console.log('[ColorPicker] Calling onChange with:', [rgba[0], rgba[1], rgba[2], alpha / 100]);
 
       onChange([rgba[0], rgba[1], rgba[2], alpha / 100]);
     }
