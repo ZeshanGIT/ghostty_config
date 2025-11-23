@@ -11,7 +11,7 @@ import {
   ColorPickerEyeDropper,
 } from '@/components/ui/shadcn-io/color-picker';
 import Color from 'color';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 interface ColorEditorProps {
   value: string;
@@ -31,6 +31,7 @@ export function ColorEditor({
   placeholder = '#000000',
 }: ColorEditorProps) {
   const [localValue, setLocalValue] = useState(value || '');
+  const [pickerColor, setPickerColor] = useState('#000000');
 
   // Normalize color value for display
   const normalizeColor = (color: string | undefined | null): string => {
@@ -54,11 +55,19 @@ export function ColorEditor({
     onChange(newValue);
   };
 
-  const handleColorPickerChange = (rgba: [number, number, number, number]) => {
-    const color = Color.rgb(rgba[0], rgba[1], rgba[2]).alpha(rgba[3]);
-    const hexColor = color.hex();
-    setLocalValue(hexColor);
-    onChange(hexColor);
+  const handleColorPickerChange = useCallback(
+    (rgba: [number, number, number, number]) => {
+      const color = Color.rgb(rgba[0], rgba[1], rgba[2]).alpha(rgba[3]);
+      const hexColor = color.hex();
+      setPickerColor(hexColor);
+      setLocalValue(hexColor);
+      onChange(hexColor);
+    },
+    [onChange]
+  );
+
+  const handlePopoverOpen = () => {
+    setPickerColor(displayColor);
   };
 
   return (
@@ -67,7 +76,7 @@ export function ColorEditor({
         {label}
       </Label>
       <div className="flex gap-2">
-        <Popover>
+        <Popover onOpenChange={open => open && handlePopoverOpen()}>
           <PopoverTrigger asChild>
             <button
               type="button"
@@ -79,7 +88,7 @@ export function ColorEditor({
           </PopoverTrigger>
           <PopoverContent className="w-80 p-4">
             <ColorPicker
-              value={displayColor}
+              value={pickerColor}
               onChange={handleColorPickerChange as (value: Parameters<typeof Color.rgb>[0]) => void}
             >
               <div className="space-y-4">
